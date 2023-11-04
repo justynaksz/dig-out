@@ -1,10 +1,9 @@
 package com.digout.repository.cemetery.repository;
 
 import com.digout.repository.cemetery.model.Grave;
-import com.digout.repository.cemetery.model.Localization;
-import java.util.Collections;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -18,16 +17,14 @@ public class GraveRepository {
         return null;
     }
 
-    public boolean delete(int id) {
-        return false;
+    public void delete(int id) {
     }
 
-    public boolean update(int id) {
-        return false;
+    public Grave update(Grave grave) {
+        return grave;
     }
 
-    public Grave add(String cemetery, String type, Localization localization,
-                     String graveOwner, boolean availability){
-        return null;
+    public Grave create(Grave grave) {
+        return grave;
     }
 }

@@ -9,6 +9,5 @@ public record Deceased(
         LocalDateTime birthDate,
         LocalDateTime deathDate,
         boolean isInfectiousDisease,
-        Grave grave
-) {
+        Grave grave) {
 }

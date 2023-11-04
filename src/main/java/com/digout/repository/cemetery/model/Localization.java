@@ -4,6 +4,5 @@ public record Localization(
         int id,
         String quarter,
         String column,
-        String row
-) {
+        String row) {
 }

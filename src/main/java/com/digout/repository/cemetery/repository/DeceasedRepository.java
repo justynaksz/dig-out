@@ -1,10 +1,8 @@
 package com.digout.repository.cemetery.repository;
 
 import com.digout.repository.cemetery.model.Deceased;
-import com.digout.repository.cemetery.model.Grave;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,16 +17,14 @@ public class DeceasedRepository {
         return null;
     }
 
-    public boolean delete(int id) {
-        return false;
+    public void delete(int id) {
     }
 
-    public boolean update(int id) {
-        return false;
+    public Deceased update(Deceased deceased) {
+        return deceased;
     }
 
-    public Deceased add(String firstName, String lastName, LocalDateTime birthDate,
-                        LocalDateTime deathDate, boolean isInfectiousDisease, Grave grave){
-        return null;
+    public Deceased create(Deceased deceased) {
+        return deceased;
     }
 }
