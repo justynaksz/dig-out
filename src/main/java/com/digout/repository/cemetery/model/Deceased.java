@@ -1,13 +1,13 @@
 package com.digout.repository.cemetery.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public record Deceased(
         int id,
         String firstName,
         String lastName,
-        LocalDateTime birthDate,
-        LocalDateTime deathDate,
+        Date birthDate,
+        Date deathDate,
         boolean isInfectiousDisease,
         Grave grave) {
 }
