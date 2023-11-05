@@ -1,7 +1,6 @@
-package com.digout.repository.cemetery;
+package com.digout.repository.cemetery.repository;
 
 import com.digout.repository.cemetery.model.Localization;
-import com.digout.repository.cemetery.repository.LocalizationRepository;
 import com.digout.repository.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
