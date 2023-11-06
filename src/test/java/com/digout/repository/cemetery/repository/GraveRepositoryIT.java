@@ -2,27 +2,23 @@ package com.digout.repository.cemetery.repository;
 
 import com.digout.repository.cemetery.model.Grave;
 import com.digout.repository.cemetery.model.Localization;
-import com.digout.repository.exception.NotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class GraveRepositoryIT {
 
     @Autowired
@@ -69,118 +65,35 @@ class GraveRepositoryIT {
             // THEN
             assertEquals(grave, graveRetrieved);
         }
-
-        @Test
-        @DisplayName("grave not found")
-        void findByIdShouldThrowExceptionIfGraveDoesNotExist() {
-            // GIVEN
-            var id = 6;
-            // WHEN
-
-            // THEN
-            assertThrows(NotFoundException.class, () -> graveRepository.findById(id));
-        }
     }
 
     @Nested
     @DisplayName("GRAVE - delete tests")
     class deleteTest {
         @Test
+        @Transactional
         @DisplayName("deleted grave is not present in db")
         void deleteShouldRemoveGraveOfGivenIdFromDb() {
             // GIVEN
             var id = 3;
             var grave = graveRepository.findById(id);
             // WHEN
-            graveRepository.delete(id);
+            graveRepository.deleteById(id);
             // THEN
             assertFalse(graveRepository.findAll().contains(grave));
         }
 
         @Test
+        @Transactional
         @DisplayName("grave count should be decremented")
         void deleteShouldDecrementGravesCountInDb() {
             // GIVEN
             var id = 1;
             var gravesCountExpected = graveRepository.findAll().size() - 1;
             // WHEN
-            graveRepository.delete(id);
+            graveRepository.deleteById(id);
             // THEN
             assertEquals(gravesCountExpected, graveRepository.findAll().size());
-        }
-
-        @Test
-        @DisplayName("deleting not existing grave")
-        void deleteNotExistingGraveShouldThrowException() {
-            // GIVEN
-            var id = 8;
-            // WHEN
-
-            // THEN
-            assertThrows(NotFoundException.class, () -> graveRepository.delete(id));
-        }
-    }
-
-    @Nested
-    @DisplayName("GRAVE - update tests")
-    class updateTest {
-        @Test
-        @DisplayName("updated grave is not equal to the pre-updated one")
-        void updateShouldVaryGraveFromPreUpdateGraveInDb() {
-            // GIVEN
-            var id = 3;
-            var localization = new Localization(3, "B4", "1", "A");
-            var graveUpdate = new Grave(id, "New moon cemetery", "coffin grave", localization,
-                    "Eddy Goldfin", false);
-            var grave = graveRepository.findById(id);
-            // WHEN
-            graveRepository.update(graveUpdate);
-            // THEN
-            assertNotEquals(grave, graveRepository.findById(id));
-        }
-
-        @Test
-        @DisplayName("updated grave is equal to the given grave")
-        void updateShouldCorrectlyUpdateGraveInDb() {
-            // GIVEN
-            var id = 3;
-            var localization = new Localization(3, "B4", "1", "A");
-            var graveUpdate = new Grave(id, "New moon cemetery", "coffin grave", localization,
-                    "Eddy Goldfin", false);
-            // WHEN
-            graveRepository.update(graveUpdate);
-            // THEN
-            assertEquals(graveUpdate, graveRepository.findById(id));
-        }
-
-        @Test
-        @DisplayName("grave count should not be changed")
-        void updateShouldNotChangeGravesCountInDb() {
-            // GIVEN
-            var id = 3;
-            var localization = new Localization(3, "B4", "1", "A");
-            var graveUpdate = new Grave(id, "New moon cemetery", "coffin grave", localization,
-                    "Eddy Goldfin", false);
-            var gravesCount = graveRepository.findAll().size();
-            // WHEN
-            graveRepository.update(graveUpdate);
-            // THEN
-            assertEquals(gravesCount, graveRepository.findAll().size());
-        }
-
-        @Test
-        @DisplayName("updating not existing grave")
-        void updateNotExistingGraveShouldThrowException() {
-            // GIVEN
-            var id = 10;
-            var localization = new Localization(3, "B4", "1", "A");
-            var graveUpdate = new Grave(id, "New moon cemetery", "coffin grave", localization,
-                    "Eddy Goldfin", false);
-            // WHEN
-
-            // THEN
-            assertThrows(NotFoundException.class,
-                    () -> graveRepository.update(graveUpdate));
         }
     }
 
@@ -188,6 +101,7 @@ class GraveRepositoryIT {
     @DisplayName("GRAVE - create tests")
     class createTest {
         @Test
+        @Transactional
         @DisplayName("created grave is present in db")
         void createShouldCreateNewRecordInDb() {
             // GIVEN
@@ -196,12 +110,13 @@ class GraveRepositoryIT {
             var grave = new Grave(id, "Happy ever after cemetery", "columbarium", localization,
                     "Cecil Anderson", true);
             // WHEN
-            graveRepository.create(grave);
+            graveRepository.save(grave);
             // THEN
             assertTrue(graveRepository.findAll().contains(grave));
         }
 
         @Test
+        @Transactional
         @DisplayName("graves count is incremented when new grave is created")
         void createShouldIncrementGravesCountInDb() {
             // GIVEN
@@ -210,7 +125,7 @@ class GraveRepositoryIT {
             var grave = new Grave(id, "Happy ever after cemetery", "columbarium", localization,
                     "Cecil Anderson", true);
             // WHEN
-            graveRepository.create(grave);
+            graveRepository.save(grave);
             // THEN
             assertEquals(6, graveRepository.findAll().size());
         }

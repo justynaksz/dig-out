@@ -1,30 +1,15 @@
 package com.digout.repository.cemetery.repository;
 
 import com.digout.repository.cemetery.model.Localization;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
-import java.util.List;
-
 @Repository
-public class LocalizationRepository {
+public interface LocalizationRepository extends JpaRepository<Localization, Integer> {
 
-    public List<Localization> findAll() {
-        return Collections.emptyList();
-    }
+    Localization findById(int id);
 
-    public Localization findById(int id) {
-        return null;
-    }
+    void deleteById(int id);
 
-    public void delete(int id) {
-    }
-
-    public Localization update(Localization localization) {
-        return localization;
-    }
-
-    public Localization create(Localization localization) {
-        return localization;
-    }
+    Localization save(Localization localization);
 }

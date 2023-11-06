@@ -1,30 +1,15 @@
 package com.digout.repository.cemetery.repository;
 
 import com.digout.repository.cemetery.model.Grave;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
-import java.util.List;
-
 @Repository
-public class GraveRepository {
+public interface GraveRepository extends JpaRepository<Grave, Integer> {
 
-    public List<Grave> findAll() {
-        return Collections.emptyList();
-    }
+    Grave findById(int id);
 
-    public Grave findById(int id) {
-        return null;
-    }
+    void deleteById(int id);
 
-    public void delete(int id) {
-    }
-
-    public Grave update(Grave grave) {
-        return grave;
-    }
-
-    public Grave create(Grave grave) {
-        return grave;
-    }
+    Grave save(Grave grave);
 }
