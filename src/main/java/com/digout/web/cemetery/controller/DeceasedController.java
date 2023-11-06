@@ -2,14 +2,13 @@ package com.digout.web.cemetery.controller;
 
 import com.digout.repository.cemetery.model.Deceased;
 import com.digout.repository.cemetery.repository.DeceasedRepository;
-import com.digout.repository.cemetery.repository.GraveRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -18,11 +17,10 @@ import java.util.List;
 public class DeceasedController {
 
     private final DeceasedRepository deceasedRepository;
-    private final GraveRepository graveRepository;
 
-    public DeceasedController(DeceasedRepository deceasedRepository, GraveRepository graveRepository) {
+    @Autowired
+    public DeceasedController(DeceasedRepository deceasedRepository) {
         this.deceasedRepository = deceasedRepository;
-        this.graveRepository = graveRepository;
     }
 
     @GetMapping
@@ -37,16 +35,11 @@ public class DeceasedController {
 
     @DeleteMapping(path = "/{id}")
     public void delete(int id) {
-        deceasedRepository.delete(id);
-    }
-
-    @PutMapping
-    public Deceased update(@RequestBody Deceased deceased) {
-        return deceasedRepository.update(deceased);
+        deceasedRepository.deleteById(id);
     }
 
     @PostMapping
     public Deceased create(@RequestBody Deceased deceased) {
-        return deceasedRepository.create(deceased);
+        return deceasedRepository.save(deceased);
     }
 }

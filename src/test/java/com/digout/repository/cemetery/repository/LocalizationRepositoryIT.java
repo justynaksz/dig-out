@@ -1,27 +1,23 @@
 package com.digout.repository.cemetery.repository;
 
 import com.digout.repository.cemetery.model.Localization;
-import com.digout.repository.exception.NotFoundException;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class LocalizationRepositoryIT {
 
     @Autowired
@@ -62,111 +58,35 @@ class LocalizationRepositoryIT {
             // THEN
             assertEquals(localization, localizationRetrieved);
         }
-
-        @Test
-        @DisplayName("localization not found")
-        void findByIdShouldThrowExceptionIfLocalizationDoesNotExist() {
-            // GIVEN
-            var id = 6;
-            // WHEN
-
-            // THEN
-            assertThrows(NotFoundException.class, () -> localizationRepository.findById(id));
-        }
     }
 
     @Nested
     @DisplayName("LOCALIZATION - delete tests")
     class deleteTest {
         @Test
+        @Transactional
         @DisplayName("deleted localization is not present in db")
         void deleteShouldRemoveLocalizationOfGivenIdFromDb() {
             // GIVEN
             var id = 3;
             var localization = localizationRepository.findById(id);
             // WHEN
-            localizationRepository.delete(id);
+            localizationRepository.deleteById(id);
             // THEN
             assertFalse(localizationRepository.findAll().contains(localization));
         }
 
         @Test
+        @Transactional
         @DisplayName("localization count should be decremented")
         void deleteShouldDecrementLocalizationsCountInDb() {
             // GIVEN
             var id = 1;
             var localizationsCountExpected = localizationRepository.findAll().size() - 1;
             // WHEN
-            localizationRepository.delete(id);
+            localizationRepository.deleteById(id);
             // THEN
             assertEquals(localizationsCountExpected, localizationRepository.findAll().size());
-        }
-
-        @Test
-        @DisplayName("deleting not existing localization")
-        void deleteNotExistingLocalizationShouldThrowException() {
-            // GIVEN
-            var id = 8;
-            // WHEN
-
-            // THEN
-            assertThrows(NotFoundException.class, () -> localizationRepository.delete(id));
-        }
-    }
-
-    @Nested
-    @DisplayName("LOCALIZATION - update tests")
-    class updateTest {
-        @Test
-        @DisplayName("updated localization is not equal to the pre-updated one")
-        void updateShouldVaryLocalizationFromPreUpdateLocalizationInDb() {
-            // GIVEN
-            var id = 3;
-            var localization = localizationRepository.findById(id);
-            var localizationUpdate = new Localization(id, "A8", "B", "7");
-            // WHEN
-            localizationRepository.update(localizationUpdate);
-            // THEN
-            assertNotEquals(localization, localizationRepository.findById(id));
-        }
-
-        @Test
-        @DisplayName("updated localization is equal to the given localization")
-        void updateShouldCorrectlyUpdateLocalizationInDb() {
-            // GIVEN
-            var id = 3;
-            var localizationUpdate = new Localization(id, "A8", "B", "7");
-            // WHEN
-            localizationRepository.update(localizationUpdate);
-            // THEN
-            assertEquals(localizationUpdate, localizationRepository.findById(id));
-        }
-
-        @Test
-        @DisplayName("localization count should not be changed")
-        void updateShouldNotChangeLocalizationsCountInDb() {
-            // GIVEN
-            var id = 3;
-            var localizationUpdate = new Localization(id, "A8", "B", "7");
-            var localizationsCount = localizationRepository.findAll().size();
-            // WHEN
-            localizationRepository.update(localizationUpdate);
-            // THEN
-            assertEquals(localizationsCount, localizationRepository.findAll().size());
-        }
-
-        @Test
-        @DisplayName("updating not existing localization")
-        void updateNotExistingLocalizationShouldThrowException() {
-            // GIVEN
-            var id = 10;
-            var localizationUpdate = new Localization(id, "A8", "B", "7");
-
-            // WHEN
-
-            // THEN
-            assertThrows(NotFoundException.class,
-                    () -> localizationRepository.update(localizationUpdate));
         }
     }
 
@@ -174,23 +94,25 @@ class LocalizationRepositoryIT {
     @DisplayName("LOCALIZATION - create tests")
     class createTest {
         @Test
+        @Transactional
         @DisplayName("created localization is present in db")
         void createShouldCreateNewRecordInDb() {
             // GIVEN
             var localization = new Localization(6, "D9", "1", "1");
             // WHEN
-            localizationRepository.create(localization);
+            localizationRepository.save(localization);
             // THEN
             assertTrue(localizationRepository.findAll().contains(localization));
         }
 
         @Test
+        @Transactional
         @DisplayName("localizations count is incremented when new localization is created")
         void createShouldIncrementLocalizationsCountInDb() {
             // GIVEN
             var localization = new Localization(6, "D9", "1", "1");
             // WHEN
-            localizationRepository.create(localization);
+            localizationRepository.save(localization);
             // THEN
             assertEquals(6, localizationRepository.findAll().size());
         }
