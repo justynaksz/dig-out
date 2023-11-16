@@ -1,5 +1,6 @@
 CREATE TABLE localization (
 	id SERIAL PRIMARY KEY,
+	cemetery VARCHAR(200),
 	quarter VARCHAR(4) NOT NULL,
 	localization_row VARCHAR(4) NOT NULL,
 	localization_column VARCHAR(4) NOT NULL
@@ -7,7 +8,6 @@ CREATE TABLE localization (
 
 CREATE TABLE grave (
 	id SERIAL PRIMARY KEY,
-	cemetery VARCHAR(50),
 	type VARCHAR (20),
 	localization INT NOT NULL,
 	grave_owner VARCHAR(50),

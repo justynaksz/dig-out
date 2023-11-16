@@ -6,7 +6,6 @@ import com.digout.database.generator.model.LocalizationGenerator;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ScriptGenerator {
@@ -55,7 +54,11 @@ public class ScriptGenerator {
                 graveBuilder.append("INSERT INTO grave (type, localization, grave_owner) VALUES (");
                 graveBuilder.append("'").append(graveAttributes[0]).append("',");
                 graveBuilder.append("'").append(graveAttributes[1]).append("',");
-                graveBuilder.append("'").append(graveAttributes[2]).append("');");
+                if (graveAttributes[2].equals("NULL")) {
+                    graveBuilder.append(graveAttributes[2]).append(");");
+                } else {
+                    graveBuilder.append("'").append(graveAttributes[2]).append("');");
+                }
                 bufferedWriter.write(graveBuilder.toString());
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
