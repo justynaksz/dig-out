@@ -28,16 +28,16 @@ class GraveRepositoryIT {
     @DisplayName("GRAVE - find all test")
     void findAllShouldReturnListOfAllGraves() {
         // GIVEN
-        var localization1 = new Localization(1, "A1", "7", "18");
-        var localization2 = new Localization(2, "J8", "C", "1");
-        var localization3 = new Localization(3, "B4", "4", "A");
-        var localization4 = new Localization(4, "A1", "14", "21");
-        var localization5 = new Localization(5, "A0", "11", "3");
-        var grave1 = new Grave(1, "New moon cemetery", "coffin grave", localization4, "John Smith", true);
-        var grave2 = new Grave(2, "Rest in peace cemetery", "coffin grave", localization1, "Edith Gawronsky", false);
-        var grave3 = new Grave(3, "New moon cemetery", "urn grave", localization3, "Mary Goldfin", false);
-        var grave4 = new Grave(4, "Oak valley cemetery", "columbarium", localization5, "Ann Black", false);
-        var grave5 = new Grave(5, "Green hills cemetery", "urn grave", localization2, "Sean Williams", true);
+        var localization1 = new Localization(1, "New moon cemetery.txt", "A1", "7", "18");
+        var localization2 = new Localization(2, "Rest in peace cemetery.txt", "J8", "C", "1");
+        var localization3 = new Localization(3, "New moon cemetery.txt", "B4", "4", "A");
+        var localization4 = new Localization(4, "Oak valley cemetery.txt", "A1", "14", "21");
+        var localization5 = new Localization(5, "Green hills cemetery.txt", "A0", "11", "3");
+        var grave1 = new Grave(1, "coffin grave", localization4, "John Smith");
+        var grave2 = new Grave(2, "coffin grave", localization1, "Edith Gawronsky");
+        var grave3 = new Grave(3, "urn grave", localization3, "Mary Goldfin");
+        var grave4 = new Grave(4, "columbarium", localization5, "Ann Black");
+        var grave5 = new Grave(5, "urn grave", localization2, "Sean Williams");
         var graves = new ArrayList<>();
         graves.add(grave1);
         graves.add(grave2);
@@ -59,8 +59,8 @@ class GraveRepositoryIT {
             // GIVEN
             var id = 3;
             // WHEN
-            var localization = new Localization(3, "B4", "4", "A");
-            var grave = new Grave(3, "New moon cemetery", "urn grave", localization, "Mary Goldfin", false);
+            var localization = new Localization(3, "New moon cemetery.txt", "B4", "4", "A");
+            var grave = new Grave(3, "urn grave", localization, "Mary Goldfin");
             var graveRetrieved = graveRepository.findById(3);
             // THEN
             assertEquals(grave, graveRetrieved);
@@ -106,9 +106,9 @@ class GraveRepositoryIT {
         void createShouldCreateNewRecordInDb() {
             // GIVEN
             int id = 6;
-            var localization = new Localization(id, "A6", "7", "X");
-            var grave = new Grave(id, "Happy ever after cemetery", "columbarium", localization,
-                    "Cecil Anderson", true);
+            var localization = new Localization(id, "Happy ever after cemetery.txt", "A6", "7", "X");
+            var grave = new Grave(id, "columbarium", localization,
+                    "Cecil Anderson");
             // WHEN
             graveRepository.save(grave);
             // THEN
@@ -121,9 +121,9 @@ class GraveRepositoryIT {
         void createShouldIncrementGravesCountInDb() {
             // GIVEN
             int id = 6;
-            var localization = new Localization(id, "A6", "7", "X");
-            var grave = new Grave(id, "Happy ever after cemetery", "columbarium", localization,
-                    "Cecil Anderson", true);
+            var localization = new Localization(id, "Happy ever after cemetery.txt", "A6", "7", "X");
+            var grave = new Grave(id, "columbarium", localization,
+                    "Cecil Anderson");
             // WHEN
             graveRepository.save(grave);
             // THEN

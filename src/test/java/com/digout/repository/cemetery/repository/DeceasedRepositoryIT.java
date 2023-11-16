@@ -30,21 +30,21 @@ class DeceasedRepositoryIT {
     @DisplayName("DECEASED - find all test")
     void findAllShouldReturnListOfAllDeceased() {
         // GIVEN
-        var localization1 = new Localization(1, "A1", "7", "18");
-        var localization2 = new Localization(2, "J8", "C", "1");
-        var localization3 = new Localization(3, "B4", "4", "A");
-        var localization4 = new Localization(4, "A1", "14", "21");
-        var localization5 = new Localization(5, "A0", "11", "3");
-        var grave1 = new Grave(1, "New moon cemetery", "coffin grave", localization4,
-                "John Smith", true);
-        var grave2 = new Grave(2, "Rest in peace cemetery", "coffin grave", localization1,
-                "Edith Gawronsky", false);
-        var grave3 = new Grave(3, "New moon cemetery", "urn grave", localization3,
-                "Mary Goldfin", false);
-        var grave4 = new Grave(4, "Oak valley cemetery", "columbarium", localization5, 
-                "Ann Black", false);
-        var grave5 = new Grave(5, "Green hills cemetery", "urn grave", localization2,
-                "Sean Williams", true);
+        var localization1 = new Localization(1, "New moon cemetery.txt", "A1", "7", "18");
+        var localization2 = new Localization(2, "Rest in peace cemetery.txt", "J8", "C", "1");
+        var localization3 = new Localization(3, "New moon cemetery.txt", "B4", "4", "A");
+        var localization4 = new Localization(4, "Oak valley cemetery.txt", "A1", "14", "21");
+        var localization5 = new Localization(5, "Green hills cemetery.txt", "A0", "11", "3");
+        var grave1 = new Grave(1, "coffin grave", localization4,
+                "John Smith");
+        var grave2 = new Grave(2, "coffin grave", localization1,
+                "Edith Gawronsky");
+        var grave3 = new Grave(3, "urn grave", localization3,
+                "Mary Goldfin");
+        var grave4 = new Grave(4, "columbarium", localization5,
+                "Ann Black");
+        var grave5 = new Grave(5, "urn grave", localization2,
+                "Sean Williams");
         var deceased1 = new Deceased(1, "Noah", "Gross", LocalDateTime.of(1974, 11, 1, 0, 0, 0),
                 LocalDateTime.of(2023, 6, 13, 0, 0, 0), false, grave5);
         var deceased2 = new Deceased(2, "Melody", "Fletcher", LocalDateTime.of(1942, 7, 29, 0, 0, 0),
@@ -76,9 +76,9 @@ class DeceasedRepositoryIT {
             // GIVEN
             var id = 5;
             // WHEN
-            var localization = new Localization(3, "B4", "4", "A");
-            var grave = new Grave(3, "New moon cemetery", "urn grave", localization,
-                    "Mary Goldfin", false);
+            var localization = new Localization(3, "New moon cemetery.txt", "B4", "4", "A");
+            var grave = new Grave(3, "urn grave", localization,
+                    "Mary Goldfin");
             var deceased = new Deceased(id, "Collin", "Moody", LocalDateTime.of(1964, 4, 19, 0, 0, 0),
                     LocalDateTime.of(2023, 1, 7, 0, 0, 0), false, grave);
             var deceasedRetrieved = deceasedRepository.findById(id);
@@ -126,9 +126,9 @@ class DeceasedRepositoryIT {
         void createShouldCreateNewRecordInDb() {
             // GIVEN
             int id = 6;
-            var localization = new Localization(4, "A1", "14", "21");
-            var grave = new Grave(1, "New moon cemetery", "coffin grave", localization,
-                    "John Smith", true);
+            var localization = new Localization(4, "Oak valley cemetery.txt", "A1", "14", "21");
+            var grave = new Grave(1, "coffin grave", localization,
+                    "John Smith");
             var deceased = new Deceased(id, "Peter", "Jones", LocalDateTime.of(1952, 10, 17, 0, 0, 0),
                     LocalDateTime.of(1998, 4, 7, 0, 0, 0), false, grave);
             // WHEN
@@ -143,9 +143,9 @@ class DeceasedRepositoryIT {
         void createShouldIncrementDeceasedCountInDb() {
             // GIVEN
             int id = 6;
-            var localization = new Localization(4, "A1", "14", "21");
-            var grave = new Grave(1, "New moon cemetery", "coffin grave", localization,
-                    "John Smith", true);
+            var localization = new Localization(4, "New moon cemetery.txt", "A1", "14", "21");
+            var grave = new Grave(1, "coffin grave", localization,
+                    "John Smith");
             var deceased = new Deceased(id, "Peter", "Jones", LocalDateTime.of(1952, 10, 17, 0, 0, 0),
                     LocalDateTime.of(1998, 4, 7, 0, 0, 0), false, grave);
             // WHEN

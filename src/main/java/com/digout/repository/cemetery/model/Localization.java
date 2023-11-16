@@ -18,6 +18,9 @@ public class Localization {
     private int id;
 
     @Column
+    private String cemetery;
+
+    @Column
     private String quarter;
 
     @Column
@@ -29,8 +32,9 @@ public class Localization {
     public Localization() {
     }
 
-    public Localization(int id, String quarter, String localizationRow, String localizationColumn) {
+    public Localization(int id, String cemetery, String quarter, String localizationRow, String localizationColumn) {
         this.id = id;
+        this.cemetery = cemetery;
         this.quarter = quarter;
         this.localizationRow = localizationRow;
         this.localizationColumn = localizationColumn;
@@ -42,6 +46,14 @@ public class Localization {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCemetery() {
+        return cemetery;
+    }
+
+    public void setCemetery(String cemetery) {
+        this.cemetery = cemetery;
     }
 
     public String getQuarter() {
@@ -73,18 +85,19 @@ public class Localization {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Localization that = (Localization) o;
-        return id == that.id && Objects.equals(quarter, that.quarter) && Objects.equals(localizationRow, that.localizationRow) && Objects.equals(localizationColumn, that.localizationColumn);
+        return id == that.id && Objects.equals(cemetery, that.cemetery) && Objects.equals(quarter, that.quarter) && Objects.equals(localizationRow, that.localizationRow) && Objects.equals(localizationColumn, that.localizationColumn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quarter, localizationRow, localizationColumn);
+        return Objects.hash(id, cemetery, quarter, localizationRow, localizationColumn);
     }
 
     @Override
     public String toString() {
         return "Localization{" +
                 "id=" + id +
+                ", cemetery.txt='" + cemetery + '\'' +
                 ", quarter='" + quarter + '\'' +
                 ", localizationRow='" + localizationRow + '\'' +
                 ", localizationColumn='" + localizationColumn + '\'' +

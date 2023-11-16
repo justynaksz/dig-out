@@ -21,9 +21,6 @@ public class Grave {
     private int id;
 
     @Column
-    private String cemetery;
-
-    @Column
     private String type;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -33,19 +30,14 @@ public class Grave {
     @Column
     private String graveOwner;
 
-    @Column
-    private boolean availability;
-
     public Grave() {
     }
 
-    public Grave(int id, String cemetery, String type, Localization localization, String graveOwner, boolean availability) {
+    public Grave(int id, String type, Localization localization, String graveOwner) {
         this.id = id;
-        this.cemetery = cemetery;
         this.type = type;
         this.localization = localization;
         this.graveOwner = graveOwner;
-        this.availability = availability;
     }
 
     public int getId() {
@@ -54,14 +46,6 @@ public class Grave {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getCemetery() {
-        return cemetery;
-    }
-
-    public void setCemetery(String cemetery) {
-        this.cemetery = cemetery;
     }
 
     public String getType() {
@@ -88,36 +72,26 @@ public class Grave {
         this.graveOwner = graveOwner;
     }
 
-    public boolean isAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Grave grave = (Grave) o;
-        return id == grave.id && availability == grave.availability && Objects.equals(cemetery, grave.cemetery) && Objects.equals(type, grave.type) && Objects.equals(localization, grave.localization) && Objects.equals(graveOwner, grave.graveOwner);
+        return id == grave.id && Objects.equals(type, grave.type) && Objects.equals(localization, grave.localization) && Objects.equals(graveOwner, grave.graveOwner);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cemetery, type, localization, graveOwner, availability);
+        return Objects.hash(id, type, localization, graveOwner);
     }
 
     @Override
     public String toString() {
         return "Grave{" +
                 "id=" + id +
-                ", cemetery='" + cemetery + '\'' +
                 ", type='" + type + '\'' +
                 ", localization=" + localization +
-                ", graveOwner='" + graveOwner + '\'' +
-                ", availability=" + availability +
+                ", graveOwner='" + graveOwner +
                 '}';
     }
 }
