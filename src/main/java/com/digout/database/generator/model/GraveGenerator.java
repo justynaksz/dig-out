@@ -35,12 +35,20 @@ public class GraveGenerator {
         return graveTypes[typeNumber];
     }
 
+    // 20% of graves should not have owners
     private String generateOwnerName() {
+        int pickedParam = random.nextInt(1, 100);
         InputReader inputReader = new InputReader();
-        StringBuilder ownerBuilder = new StringBuilder();
-        ownerBuilder.append(inputReader.getFirstName());
-        ownerBuilder.append(" ");
-        ownerBuilder.append(inputReader.getSurname());
-        return ownerBuilder.toString();
+        String ownerName;
+        if(pickedParam <= 20) {
+            ownerName = "NULL";
+        } else {
+            StringBuilder ownerBuilder = new StringBuilder();
+            ownerBuilder.append(inputReader.getFirstName());
+            ownerBuilder.append(" ");
+            ownerBuilder.append(inputReader.getSurname());
+            ownerName = ownerBuilder.toString();
+        }
+        return ownerName;
     }
 }

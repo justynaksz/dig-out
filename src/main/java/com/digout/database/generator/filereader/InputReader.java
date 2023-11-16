@@ -12,29 +12,28 @@ public class InputReader {
     private static final String SURNAME_PATH = "src\\main\\resources\\inputs\\surname.txt";
     private static final String CEMETERY_PATH = "src\\main\\resources\\inputs\\cemetery.txt";
 
-    private static final Integer nameCount = 800;
-    private static final Integer surnameCount = 665;
-    private static final Integer cemeteryCount = 560;
+    private static final Integer NAME_COUNT = 800;
+    private static final Integer SURNAME_COUNT = 665;
+    private static final Integer CEMETERY_COUNT = 560;
 
     private final Random random = new Random();
 
     public String getFirstName() {
-        return getLine(NAME_PATH, nameCount);
+        return getLine(NAME_PATH, NAME_COUNT);
     }
 
     public String getSurname() {
-        return getLine(SURNAME_PATH, surnameCount);
+        return getLine(SURNAME_PATH, SURNAME_COUNT);
     }
 
     public String getCemetery() {
-        return getLine(CEMETERY_PATH, cemeteryCount);
+        return getLine(CEMETERY_PATH, CEMETERY_COUNT);
     }
 
     private String getLine(String filePath, int bound) {
         int lineNumber = random.nextInt(1, bound);
         String line = "";
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(filePath));
+        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(filePath))) {
             int currentLine = 0;
             while (line != null) {
                 currentLine++;
