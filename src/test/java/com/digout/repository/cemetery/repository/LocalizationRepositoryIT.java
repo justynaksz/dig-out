@@ -27,11 +27,11 @@ class LocalizationRepositoryIT {
     @DisplayName("LOCALIZATION - find all test")
     void findAllShouldReturnListOfAllLocalizations() {
         // GIVEN
-        var localization1 = new Localization(1, "A1", "7", "18");
-        var localization2 = new Localization(2, "J8", "C", "1");
-        var localization3 = new Localization(3, "B4", "4", "A");
-        var localization4 = new Localization(4, "A1", "14", "21");
-        var localization5 = new Localization(5, "A0", "11", "3");
+        var localization1 = new Localization(1, "New moon cemetery.txt", "A1", "7", "18");
+        var localization2 = new Localization(2, "Rest in peace cemetery.txt", "J8", "C", "1");
+        var localization3 = new Localization(3, "New moon cemetery.txt", "B4", "4", "A");
+        var localization4 = new Localization(4, "Oak valley cemetery.txt", "A1", "14", "21");
+        var localization5 = new Localization(5, "Green hills cemetery.txt", "A0", "11", "3");
         var localizations = new ArrayList<>();
         localizations.add(localization1);
         localizations.add(localization2);
@@ -53,7 +53,7 @@ class LocalizationRepositoryIT {
             // GIVEN
             var id = 3;
             // WHEN
-            var localization = new Localization(3, "B4", "4", "A");
+            var localization = new Localization(3, "New moon cemetery.txt", "B4", "4", "A");
             var localizationRetrieved = localizationRepository.findById(3);
             // THEN
             assertEquals(localization, localizationRetrieved);
@@ -98,7 +98,7 @@ class LocalizationRepositoryIT {
         @DisplayName("created localization is present in db")
         void createShouldCreateNewRecordInDb() {
             // GIVEN
-            var localization = new Localization(6, "D9", "1", "1");
+            var localization = new Localization(6, "New moon cemetery.txt", "D9", "1", "1");
             // WHEN
             localizationRepository.save(localization);
             // THEN
@@ -110,7 +110,7 @@ class LocalizationRepositoryIT {
         @DisplayName("localizations count is incremented when new localization is created")
         void createShouldIncrementLocalizationsCountInDb() {
             // GIVEN
-            var localization = new Localization(6, "D9", "1", "1");
+            var localization = new Localization(6, "New moon cemetery.txt", "D9", "1", "1");
             // WHEN
             localizationRepository.save(localization);
             // THEN
