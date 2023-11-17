@@ -5,6 +5,7 @@ import com.digout.repository.cemetery.repository.GraveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,12 +30,12 @@ public class GraveController {
     }
 
     @GetMapping(path = "/{id}")
-    public Grave findById(int id) {
+    public Grave findById(@PathVariable int id) {
         return graveRepository.findById(id);
     }
 
     @DeleteMapping(path = "/{id}")
-    public void delete(int id) {
+    public void delete(@PathVariable int id) {
         graveRepository.deleteById(id);
     }
 

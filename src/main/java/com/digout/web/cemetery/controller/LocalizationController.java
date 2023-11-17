@@ -5,6 +5,7 @@ import com.digout.repository.cemetery.repository.LocalizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,12 +30,12 @@ public class LocalizationController {
     }
 
     @GetMapping(path = "/{id}")
-    public Localization findById(int id) {
+    public Localization findById(@PathVariable int id) {
         return localizationRepository.findById(id);
     }
 
     @DeleteMapping(path = "/{id}")
-    public void delete(int id) {
+    public void delete(@PathVariable int id) {
         localizationRepository.deleteById(id);
     }
 
