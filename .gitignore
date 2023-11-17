@@ -161,3 +161,6 @@ buildNumber.properties
 
 # Data generator output
 /src/main/resources/outputs/
+
+# Logs file
+src/main/java/com/digout/log/

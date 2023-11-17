@@ -2,6 +2,8 @@ package com.digout.database.generator;
 
 import com.digout.database.generator.model.DeceasedGenerator;
 import com.digout.database.generator.model.LocalizationGenerator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -9,6 +11,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class ScriptGenerator {
+
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     private final LocalizationGenerator localizationGenerator = new LocalizationGenerator();
     private final DeceasedGenerator deceasedGenerator = new DeceasedGenerator();
@@ -37,8 +41,9 @@ public class ScriptGenerator {
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
+            logger.error("{} localizations has been created.", localizationList.size());
         } catch (IOException e) {
-            // TODO Add logger
+            logger.error(e.getMessage());
         }
     }
 
@@ -65,8 +70,9 @@ public class ScriptGenerator {
 
                 deceasedGenerator.addGraveToCapacityMap(graveAttributes);
             }
+            logger.debug("{} graves has been created.", graveList.size());
         } catch (IOException e) {
-            // TODO Add logger
+            logger.error(e.getMessage());
         }
     }
 
@@ -90,8 +96,9 @@ public class ScriptGenerator {
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
+            logger.debug("{} deceased has been created.", deceasedList.size());
         } catch (IOException e) {
-            // TODO Add logger
+            logger.error(e.getMessage());
         }
     }
 }

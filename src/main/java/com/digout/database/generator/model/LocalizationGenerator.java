@@ -25,7 +25,6 @@ public class LocalizationGenerator{
         while(localizationCount <= expected) {
             fulfillCemetery();
         }
-        System.out.println(quarterList);
         return localizationList;
     }
 
@@ -91,7 +90,6 @@ public class LocalizationGenerator{
         char quarterLetter = generateQuarterLetter();
         int lastNum = getLastNumberForLetter(quarterLetter);
         int quarterMaxNumber = generateQuarterNumber(lastNum);
-        System.out.println("New sector has been generated: " + quarterLetter + quarterMaxNumber);
         for (int i = lastNum + 1 ; i <= quarterMaxNumber; i++) {
             StringBuilder builder = new StringBuilder();
             builder.append(quarterLetter);
