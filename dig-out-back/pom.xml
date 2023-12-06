@@ -13,7 +13,7 @@
 
     <groupId>com.dig-out-back</groupId>
     <artifactId>dig-out-back</artifactId>
-    <version>1.7.8</version>
+    <version>1.7.10</version>
     <description>Cemetery management application</description>
 
     <properties>
