@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormEvent, useState } from 'react';
-import api from '../../api/axiosConfig.js'
+import api from '../../../api/axiosConfig.js'
 
 export const RemoveLocalization = () => {
     const [id, setId] = useState ('');

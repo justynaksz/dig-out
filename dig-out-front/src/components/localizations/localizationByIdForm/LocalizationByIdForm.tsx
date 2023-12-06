@@ -1,8 +1,7 @@
 import React from 'react';
 import { FormEvent, useState } from 'react';
-import api from '../../api/axiosConfig.js';
+import api from '../../../api/axiosConfig.js';
 import { Localization, LocalizationType } from '../localization/Localization.tsx';
-import  '../../pages/Pages.scss';
 
 export const LocalizationByIdForm = () => {
   const [id, setId] = useState ('');
@@ -31,7 +30,7 @@ export const LocalizationByIdForm = () => {
 
   return (
     <div>
-    <h4 className='title'> FIND LOCALIZATION BY ID </h4>
+    <h4 className='title'>FIND LOCALIZATION BY ID</h4>
     <form className='body' onSubmit={handleSubmit}>
       <label htmlFor='id'>
         <input 

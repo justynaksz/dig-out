@@ -18,8 +18,9 @@ export const Localization = ({
         <div>
             <div className='idLine'>Id: {id}</div>
             <table className='center'>
+                <tbody>
                 <tr className='itemLine'>
-                    <td>Cemetery:</td> <td>{cemetery}</td>
+                    <td>Cemetery:</td><td>{cemetery}</td>
                 </tr>
                 <tr className='itemLine'>    
                     <td>Quarter:</td><td>{quarter}</td>
@@ -30,6 +31,7 @@ export const Localization = ({
                 <tr className='itemLine'>
                     <td>Column:</td><td>{localizationColumn}</td>
                 </tr>
+                </tbody>
             </table>
         </div>
     )

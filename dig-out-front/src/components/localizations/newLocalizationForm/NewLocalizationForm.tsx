@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import api from '../../api/axiosConfig.js';
+import api from '../../../api/axiosConfig.js';
 import { LocalizationType } from '../localization/Localization.tsx';
 
 export const NewLocalizationForm = () => { 

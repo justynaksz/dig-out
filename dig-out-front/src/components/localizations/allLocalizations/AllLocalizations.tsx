@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { LocalizationType } from '../../components/localization/Localization.tsx'
-import api from '../../api/axiosConfig.js'
+import api from '../../../api/axiosConfig.js'
 import { LocalizationsList } from '../localizationsList/LocalizationsList.tsx';
+import { LocalizationType } from '../localization/Localization.tsx';
 
 export const AllLocalizations = () => {
 

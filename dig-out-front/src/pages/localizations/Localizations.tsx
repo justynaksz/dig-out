@@ -1,8 +1,11 @@
 import React from 'react';
-import { LocalizationByIdForm } from '../../components/localizationByIdForm/LocalizationByIdForm.tsx';
-import { AllLocalizations } from '../../components/allLocalizations/AllLocalizations.tsx';
-import { NewLocalizationForm } from '../../components/newLocalizationForm/NewLocalizationForm.tsx';
-import { RemoveLocalization } from '../../components/removeLocalization/RemoveLocalization.tsx';
+
+import { LocalizationByIdForm } from '../../components/localizations/localizationByIdForm/LocalizationByIdForm.tsx';
+import { NewLocalizationForm } from '../../components/localizations/newLocalizationForm/NewLocalizationForm.tsx';
+import { RemoveLocalization } from '../../components/localizations/removeLocalization/RemoveLocalization.tsx';
+import { AllLocalizations } from '../../components/localizations/allLocalizations/AllLocalizations.tsx';
+import  '../Pages.scss';
+
 
 export const Localizations = () => {
 
