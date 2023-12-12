@@ -9,12 +9,12 @@ export const AllLocalizations = () => {
     const [localizations, setLocalizations] = useState<LocalizationType[]>([] as LocalizationType[]);
 
     const getLocalizations = async () => {
-    try {
-        const response = await api.get("/localizations");
-        setLocalizations(response.data);
-    } catch (error) {
-        console.log(error);
-    }
+        try {
+            const response = await api.get("/localizations");
+            setLocalizations(response.data);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
