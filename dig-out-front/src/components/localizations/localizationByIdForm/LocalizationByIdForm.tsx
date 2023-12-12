@@ -43,12 +43,7 @@ export const LocalizationByIdForm = () => {
     </form>
     
     {isResultVisible && 
-      <Localization 
-      id={localization?.id!}
-      cemetery={localization?.cemetery!}
-      quarter={localization?.quarter!} 
-      localizationRow={localization?.localizationRow!}
-      localizationColumn={localization?.localizationColumn!}/>}
+      <Localization {...localization!}/>}
     </div>
   )
 }
