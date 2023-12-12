@@ -1,5 +1,7 @@
 package com.digout.webapp.repository.cemetery.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -27,22 +29,24 @@ public class Deceased {
     private String lastName;
 
     @Column
-    private LocalDateTime birthDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birthDate;
 
     @Column
-    private LocalDateTime deathDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate deathDate;
 
     @Column
     private boolean isInfectiousDisease;
 
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name = "grave", referencedColumnName = "id", nullable = false)
     private Grave grave;
 
     public Deceased() {
     }
 
-    public Deceased(int id, String firstName, String lastName, LocalDateTime birthDate, LocalDateTime deathDate, boolean isInfectiousDisease, Grave grave) {
+    public Deceased(int id, String firstName, String lastName, LocalDate birthDate, LocalDate deathDate, boolean isInfectiousDisease, Grave grave) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -76,19 +80,19 @@ public class Deceased {
         this.lastName = lastName;
     }
 
-    public LocalDateTime getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDateTime birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
-    public LocalDateTime getDeathDate() {
+    public LocalDate getDeathDate() {
         return deathDate;
     }
 
-    public void setDeathDate(LocalDateTime deathDate) {
+    public void setDeathDate(LocalDate deathDate) {
         this.deathDate = deathDate;
     }
 

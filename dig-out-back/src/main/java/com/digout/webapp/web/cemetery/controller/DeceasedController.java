@@ -3,6 +3,7 @@ package com.digout.webapp.web.cemetery.controller;
 import com.digout.webapp.repository.cemetery.model.Deceased;
 import com.digout.webapp.repository.cemetery.repository.DeceasedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,21 +25,25 @@ public class DeceasedController {
         this.deceasedRepository = deceasedRepository;
     }
 
+    @CrossOrigin
     @GetMapping
     public List<Deceased> findAll() {
         return deceasedRepository.findAll();
     }
 
+    @CrossOrigin
     @GetMapping(path = "/{id}")
     public Deceased findById(@PathVariable int id) {
         return deceasedRepository.findById(id);
     }
 
+    @CrossOrigin
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable int id) {
         deceasedRepository.deleteById(id);
     }
 
+    @CrossOrigin
     @PostMapping
     public Deceased create(@RequestBody Deceased deceased) {
         return deceasedRepository.save(deceased);

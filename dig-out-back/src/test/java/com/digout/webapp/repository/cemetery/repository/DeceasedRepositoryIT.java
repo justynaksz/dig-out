@@ -3,7 +3,6 @@ package com.digout.webapp.repository.cemetery.repository;
 import com.digout.webapp.repository.cemetery.model.Deceased;
 import com.digout.webapp.repository.cemetery.model.Grave;
 import com.digout.webapp.repository.cemetery.model.Localization;
-import com.digout.webapp.repository.cemetery.repository.DeceasedRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -46,16 +45,16 @@ class DeceasedRepositoryIT {
                 "Ann Black");
         var grave5 = new Grave(5, "urn grave", localization2,
                 "Sean Williams");
-        var deceased1 = new Deceased(1, "Noah", "Gross", LocalDateTime.of(1974, 11, 1, 0, 0, 0),
-                LocalDateTime.of(2023, 6, 13, 0, 0, 0), false, grave5);
-        var deceased2 = new Deceased(2, "Melody", "Fletcher", LocalDateTime.of(1942, 7, 29, 0, 0, 0),
-                LocalDateTime.of(2004, 1, 16, 0, 0, 0), false, grave4);
-        var deceased3 = new Deceased(3, "Vera", "Park", LocalDateTime.of(1991, 7, 1, 0, 0, 0),
-                LocalDateTime.of(1999, 2, 28, 0, 0, 0), true, grave2);
-        var deceased4 = new Deceased(4, "Adam", "Norris", LocalDateTime.of(1978, 11, 1, 0, 0, 0),
-                LocalDateTime.of(2019, 12, 17, 0, 0, 0), false, grave1);
-        var deceased5 = new Deceased(5, "Collin", "Moody", LocalDateTime.of(1964, 4, 19, 0, 0, 0),
-                LocalDateTime.of(2023, 1, 7, 0, 0, 0), false, grave3);
+        var deceased1 = new Deceased(1, "Noah", "Gross", LocalDate.of(1974, 11, 1),
+                LocalDate.of(2023, 6, 13), false, grave5);
+        var deceased2 = new Deceased(2, "Melody", "Fletcher", LocalDate.of(1942, 7, 29),
+                LocalDate.of(2004, 1, 16), false, grave4);
+        var deceased3 = new Deceased(3, "Vera", "Park", LocalDate.of(1991, 7, 1),
+                LocalDate.of(1999, 2, 28), true, grave2);
+        var deceased4 = new Deceased(4, "Adam", "Norris", LocalDate.of(1978, 11, 1),
+                LocalDate.of(2019, 12, 17), false, grave1);
+        var deceased5 = new Deceased(5, "Collin", "Moody", LocalDate.of(1964, 4, 19),
+                LocalDate.of(2023, 1, 7), false, grave3);
         var deceasedList = new ArrayList<>();
         deceasedList.add(deceased1);
         deceasedList.add(deceased2);
@@ -80,8 +79,8 @@ class DeceasedRepositoryIT {
             var localization = new Localization(3, "New moon cemetery", "B4", "4", "A");
             var grave = new Grave(3, "urn grave", localization,
                     "Mary Goldfin");
-            var deceased = new Deceased(id, "Collin", "Moody", LocalDateTime.of(1964, 4, 19, 0, 0, 0),
-                    LocalDateTime.of(2023, 1, 7, 0, 0, 0), false, grave);
+            var deceased = new Deceased(id, "Collin", "Moody", LocalDate.of(1964, 4, 19),
+                    LocalDate.of(2023, 1, 7), false, grave);
             var deceasedRetrieved = deceasedRepository.findById(id);
             // THEN
             assertEquals(deceased, deceasedRetrieved);
@@ -130,8 +129,8 @@ class DeceasedRepositoryIT {
             var localization = new Localization(4, "Oak valley cemetery", "A1", "14", "21");
             var grave = new Grave(1, "coffin grave", localization,
                     "John Smith");
-            var deceased = new Deceased(id, "Peter", "Jones", LocalDateTime.of(1952, 10, 17, 0, 0, 0),
-                    LocalDateTime.of(1998, 4, 7, 0, 0, 0), false, grave);
+            var deceased = new Deceased(id, "Peter", "Jones", LocalDate.of(1952, 10, 17),
+                    LocalDate.of(1998, 4, 7), false, grave);
             // WHEN
             deceasedRepository.save(deceased);
             // THEN
@@ -147,8 +146,8 @@ class DeceasedRepositoryIT {
             var localization = new Localization(4, "New moon cemetery", "A1", "14", "21");
             var grave = new Grave(1, "coffin grave", localization,
                     "John Smith");
-            var deceased = new Deceased(id, "Peter", "Jones", LocalDateTime.of(1952, 10, 17, 0, 0, 0),
-                    LocalDateTime.of(1998, 4, 7, 0, 0, 0), false, grave);
+            var deceased = new Deceased(id, "Peter", "Jones", LocalDate.of(1952, 10, 17),
+                    LocalDate.of(1998, 4, 7), false, grave);
             // WHEN
             deceasedRepository.save(deceased);
             // THEN
