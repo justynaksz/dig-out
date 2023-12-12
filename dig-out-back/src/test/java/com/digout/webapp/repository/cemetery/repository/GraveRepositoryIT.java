@@ -2,7 +2,6 @@ package com.digout.webapp.repository.cemetery.repository;
 
 import com.digout.webapp.repository.cemetery.model.Grave;
 import com.digout.webapp.repository.cemetery.model.Localization;
-import com.digout.webapp.repository.cemetery.repository.GraveRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

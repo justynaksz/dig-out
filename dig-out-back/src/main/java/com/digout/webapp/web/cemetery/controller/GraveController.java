@@ -3,7 +3,6 @@ package com.digout.webapp.web.cemetery.controller;
 import com.digout.webapp.repository.cemetery.model.Grave;
 import com.digout.webapp.repository.cemetery.repository.GraveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,25 +24,21 @@ public class GraveController {
         this.graveRepository = graveRepository;
     }
 
-    @CrossOrigin
     @GetMapping
     public List<Grave> findAll() {
         return graveRepository.findAll();
     }
 
-    @CrossOrigin
     @GetMapping(path = "/{id}")
     public Grave findById(@PathVariable int id) {
         return graveRepository.findById(id);
     }
 
-    @CrossOrigin
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable int id) {
         graveRepository.deleteById(id);
     }
 
-    @CrossOrigin
     @PostMapping
     public Grave create(@RequestBody Grave grave) {
         return graveRepository.save(grave);

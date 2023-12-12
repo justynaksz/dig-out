@@ -3,7 +3,6 @@ package com.digout.webapp.web.cemetery.controller;
 import com.digout.webapp.repository.cemetery.model.Localization;
 import com.digout.webapp.repository.cemetery.repository.LocalizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,25 +24,21 @@ public class LocalizationController {
         this.localizationRepository = localizationRepository;
     }
 
-    @CrossOrigin
     @GetMapping
     public List<Localization> findAll() {
         return localizationRepository.findAll();
     }
 
-    @CrossOrigin
     @GetMapping(path = "/{id}")
     public Localization findById(@PathVariable int id) {
         return localizationRepository.findById(id);
     }
 
-    @CrossOrigin
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable int id) {
         localizationRepository.deleteById(id);
     }
 
-    @CrossOrigin
     @PostMapping
     public Localization create(@RequestBody Localization localization) {
         return localizationRepository.save(localization);
