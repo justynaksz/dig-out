@@ -28,16 +28,20 @@ public class Grave {
     private Localization localization;
 
     @Column
-    private String graveOwner;
+    private GraveOwner graveOwner;
+
+    @Column
+    private String photo;
 
     public Grave() {
     }
 
-    public Grave(int id, String type, Localization localization, String graveOwner) {
+    public Grave(int id, String type, Localization localization, GraveOwner graveOwner, String photo) {
         this.id = id;
         this.type = type;
         this.localization = localization;
         this.graveOwner = graveOwner;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -64,12 +68,20 @@ public class Grave {
         this.localization = localization;
     }
 
-    public String getGraveOwner() {
+    public GraveOwner getGraveOwner() {
         return graveOwner;
     }
 
-    public void setGraveOwner(String graveOwner) {
+    public void setGraveOwner(GraveOwner graveOwner) {
         this.graveOwner = graveOwner;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     @Override
@@ -77,12 +89,12 @@ public class Grave {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Grave grave = (Grave) o;
-        return id == grave.id && Objects.equals(type, grave.type) && Objects.equals(localization, grave.localization) && Objects.equals(graveOwner, grave.graveOwner);
+        return id == grave.id && Objects.equals(type, grave.type) && Objects.equals(localization, grave.localization) && Objects.equals(graveOwner, grave.graveOwner) && Objects.equals(photo, grave.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, localization, graveOwner);
+        return Objects.hash(id, type, localization, graveOwner, photo);
     }
 
     @Override
@@ -91,7 +103,8 @@ public class Grave {
                 "id=" + id +
                 ", type='" + type + '\'' +
                 ", localization=" + localization +
-                ", graveOwner='" + graveOwner +
+                ", graveOwner='" + graveOwner + '\'' +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 }

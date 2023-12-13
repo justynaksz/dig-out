@@ -8,17 +8,34 @@ CREATE TABLE localization (
 
 CREATE TABLE grave (
 	id SERIAL PRIMARY KEY,
-	type VARCHAR (20),
+	type VARCHAR(20),
 	localization INT NOT NULL,
-	grave_owner VARCHAR(50),
-	availability boolean
+	grave_owner INT,
+	photo VARCHAR(200)
 );
 
-ALTER TABLE grave ADD CONSTRAINT grave_localization
-    FOREIGN KEY (localization)
-    REFERENCES localization (id)  
-    ON DELETE CASCADE
-;
+CREATE TABLE grave_owner (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    pesel VARCHAR(50),
+    street VARCHAR(100),
+    parcel VARCHAR(10),
+    city VARCHAR(10),
+    postal_code VARCHAR(10),
+    country VARCHAR(10),
+    phone_number VARCHAR(10)
+);
+
+CREATE TABLE app_user (
+    id SERIAL PRIMARY KEY,
+    nickname VARCHAR(50) NOT NULL,
+    password VARCHAR(70) NOT NULL,
+    e_mail VARCHAR(70) NOT NULL,
+    role  VARCHAR(50) NOT NULL,
+    grave_owner INT,
+    avatar VARCHAR(200)
+);
 
 CREATE TABLE deceased (
 	id SERIAL PRIMARY KEY,
@@ -29,6 +46,24 @@ CREATE TABLE deceased (
 	is_infectious_disease boolean,
 	grave INT NOT NULL
 );
+
+ALTER TABLE grave ADD CONSTRAINT grave_localization
+    FOREIGN KEY (localization)
+    REFERENCES localization (id)
+    ON DELETE CASCADE
+;
+
+ALTER TABLE grave ADD CONSTRAINT grave_owner
+    FOREIGN KEY (grave_owner)
+    REFERENCES grave_owner (id)
+    ON DELETE CASCADE
+;
+
+ALTER TABLE app_user ADD CONSTRAINT grave_owner
+    FOREIGN KEY (grave_owner)
+    REFERENCES grave_owner (id)
+    ON DELETE CASCADE
+;
 
 ALTER TABLE deceased ADD CONSTRAINT deceased_grave
     FOREIGN KEY (grave)
