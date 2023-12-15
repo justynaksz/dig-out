@@ -1,6 +1,7 @@
 package com.digout.webapp.repository.cemetery.repository;
 
 import com.digout.webapp.repository.cemetery.model.Grave;
+import com.digout.webapp.repository.cemetery.model.GraveOwner;
 import com.digout.webapp.repository.cemetery.model.Localization;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -33,11 +34,16 @@ class GraveRepositoryIT {
         var localization3 = new Localization(3, "New moon cemetery", "B4", "4", "A");
         var localization4 = new Localization(4, "Oak valley cemetery", "A1", "14", "21");
         var localization5 = new Localization(5, "Green hills cemetery", "A0", "11", "3");
-        var grave1 = new Grave(1, "coffin grave", localization4, "John Smith");
-        var grave2 = new Grave(2, "coffin grave", localization1, "Edith Gawronsky");
-        var grave3 = new Grave(3, "urn grave", localization3, "Mary Goldfin");
-        var grave4 = new Grave(4, "columbarium", localization5, "Ann Black");
-        var grave5 = new Grave(5, "urn grave", localization2, "Sean Williams");
+        var grave_owner1 = new GraveOwner(1, "Emily", "Blunt", "88121417864", "5th Avenue", "18", "Brigthtown", "47-427", "Great Britain", "459-782-145");
+        var grave_owner2 = new GraveOwner(2, "Amanda", "Mallow", "74081517695", "Light Street", "14C/7", "Evenstone", "25-486", "Great Britain", null);
+        var grave_owner3 = new GraveOwner(3, "Robert", "Watson", null, null, null, null, null, null, null);
+        var grave_owner4 = new GraveOwner(4, "Susan", "Austin", "88121417864", "Viersene Strasse", "24A", "Viersen", "12-784", "Germany", "574-445-127");
+        var grave_owner5 = new GraveOwner(5, "John", "Gross", null, "Niepodleglosci", "14B/1", "Wielowies", "24-576", "Poland", "697-485-127");
+        var grave1 = new Grave(1, "coffin grave", localization4, grave_owner2, "123452023011812345");
+        var grave2 = new Grave(2, "coffin grave", localization1, grave_owner3, "123452023072512345");
+        var grave3 = new Grave(3, "urn grave", localization3, grave_owner1, "123452020011812345");
+        var grave4 = new Grave(4, "columbarium", localization5, grave_owner5, null);
+        var grave5 = new Grave(5, "urn grave", localization2, grave_owner4, "123452019110112345");
         var graves = new ArrayList<>();
         graves.add(grave1);
         graves.add(grave2);
@@ -60,7 +66,8 @@ class GraveRepositoryIT {
             var id = 3;
             // WHEN
             var localization = new Localization(3, "New moon cemetery", "B4", "4", "A");
-            var grave = new Grave(3, "urn grave", localization, "Mary Goldfin");
+            var grave_owner = new GraveOwner(1, "Emily", "Blunt", "88121417864", "5th Avenue", "18", "Brigthtown", "47-427", "Great Britain", "459-782-145");
+            var grave = new Grave(3, "urn grave", localization, grave_owner, "123452020011812345");
             var graveRetrieved = graveRepository.findById(3);
             // THEN
             assertEquals(grave, graveRetrieved);
@@ -107,8 +114,9 @@ class GraveRepositoryIT {
             // GIVEN
             int id = 6;
             var localization = new Localization(id, "Happy ever after cemetery", "A6", "7", "X");
+            var grave_owner = new GraveOwner(1, "Ann", "Nowak", "64122917574", "Main Street", "187", "London", "17-458", "Great Britain", "478-845-425");
             var grave = new Grave(id, "columbarium", localization,
-                    "Cecil Anderson");
+                    grave_owner, "123452572411812345");
             // WHEN
             graveRepository.save(grave);
             // THEN
@@ -122,8 +130,9 @@ class GraveRepositoryIT {
             // GIVEN
             int id = 6;
             var localization = new Localization(id, "Happy ever after cemetery", "A6", "7", "X");
+            var grave_owner = new GraveOwner(1, "Ann", "Nowak", "64122917574", "Main Street", "187", "London", "17-458", "Great Britain", "478-845-425");
             var grave = new Grave(id, "columbarium", localization,
-                    "Cecil Anderson");
+                    grave_owner, "123452572411812345");
             // WHEN
             graveRepository.save(grave);
             // THEN

@@ -1,7 +1,6 @@
 package com.digout.generator.model;
 
-import com.digout.generator.inputreader.InputReader;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,6 +9,7 @@ public class GraveGenerator {
 
     private final Random random = new Random();
     private final String[] graveTypes = new String[]{"coffin grave", "double coffin grave", "urn grave", "columbarium"};
+    private final String NULL = "NULL";
 
     private final List<String> gravesList = new ArrayList<>();
 
@@ -17,11 +17,11 @@ public class GraveGenerator {
         int finalId = initialId + expectedCount - 1;
         List<String> quarterGraveList = new ArrayList<>();
         for(int id = initialId; id <= finalId; id++) {
-            StringBuilder graveBuilder = new StringBuilder();
-            graveBuilder.append(pickGraveType()).append(",");
-            graveBuilder.append(id).append(",");
-            graveBuilder.append(generateOwnerName());
-            quarterGraveList.add(graveBuilder.toString());
+            String graveBuilder = pickGraveType() + "," +
+                    id + "," +
+                    generateOwnerId() +","
+                    + generatePhotoReference();
+            quarterGraveList.add(graveBuilder);
         }
         gravesList.addAll(quarterGraveList);
     }
@@ -36,19 +36,28 @@ public class GraveGenerator {
     }
 
     // 20% of graves should not have owners
-    private String generateOwnerName() {
+    private String generateOwnerId() {
         int pickedParam = random.nextInt(1, 100);
-        InputReader inputReader = new InputReader();
-        String ownerName;
+        String graveOwnerId;
         if(pickedParam <= 20) {
-            ownerName = "NULL";
+            graveOwnerId = NULL;
         } else {
-            StringBuilder ownerBuilder = new StringBuilder();
-            ownerBuilder.append(inputReader.getFirstName());
-            ownerBuilder.append(" ");
-            ownerBuilder.append(inputReader.getSurname());
-            ownerName = ownerBuilder.toString();
+            graveOwnerId = String.valueOf(random.nextInt(1, 1000));
         }
-        return ownerName;
+        return graveOwnerId;
+    }
+
+    private String generatePhotoReference() {
+        int randomNumber = random.nextInt(1, 100);
+        if (randomNumber <= 90) {
+            return NULL;
+        } else {
+            return LocalDateTime.now().toString()
+                    .replace("T", "")
+                    .replace(":", "")
+                    .replace("-", "")
+                    .replace(".", "")
+                    + random.nextInt(100, 999);
+        }
     }
 }

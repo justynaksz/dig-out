@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -27,7 +28,8 @@ public class Grave {
     @JoinColumn(name = "localization", referencedColumnName = "id")
     private Localization localization;
 
-    @Column
+    @ManyToOne(cascade= CascadeType.ALL)
+    @JoinColumn(name = "grave_owner", referencedColumnName = "id")
     private GraveOwner graveOwner;
 
     @Column

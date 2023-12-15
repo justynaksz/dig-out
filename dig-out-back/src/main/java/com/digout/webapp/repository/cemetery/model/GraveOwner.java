@@ -44,6 +44,23 @@ public class GraveOwner {
     @Column
     private String phoneNumber;
 
+    public GraveOwner() {
+    }
+
+    public GraveOwner(int id, String firstName, String lastName, String pesel, String street, String parcel,
+                      String city, String postalCode, String country, String phoneNumber) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pesel = pesel;
+        this.street = street;
+        this.parcel = parcel;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+    }
+
     public int getId() {
         return id;
     }

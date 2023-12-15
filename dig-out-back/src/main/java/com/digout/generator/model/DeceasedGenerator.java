@@ -28,22 +28,16 @@ public class DeceasedGenerator {
     }
 
     private void generateDeceased() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getNameAndSurname()).append(",");
-        stringBuilder.append(getBirthAndDeathDate()).append(",");
-        stringBuilder.append(isInfectiousDisease()).append(",");
-        stringBuilder.append(getGraveId());
-        String deceased = stringBuilder.toString();
+        String deceased = getNameAndSurname() + "," +
+                getBirthAndDeathDate() + "," +
+                isInfectiousDisease() + "," +
+                getGraveId();
         deceasedList.add(deceased);
     }
 
     private String getNameAndSurname() {
         InputReader inputReader = new InputReader();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(inputReader.getFirstName());
-        stringBuilder.append(",");
-        stringBuilder.append(inputReader.getSurname());
-        return stringBuilder.toString();
+        return inputReader.getFirstName() + "," + inputReader.getSurname();
     }
 
     private String isInfectiousDisease(){
@@ -119,10 +113,9 @@ public class DeceasedGenerator {
     }
 
     private String getDatesAsString(LocalDate birthDate, LocalDate deathDate) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(birthDate).append(",");
-        stringBuilder.append(deathDate);
-        return stringBuilder.toString();
+        String stringBuilder = birthDate + "," +
+                deathDate;
+        return stringBuilder;
     }
 
     private LocalDate birthDateCalculator(int startYear, int endYear) {
@@ -187,22 +180,13 @@ public class DeceasedGenerator {
     // with graveID as Key and capacity as Value
     public void addGraveToCapacityMap(String[] graveAttributes) {
         graveCount++;
-        int capacity = 0;
-        switch (graveAttributes[0]) {
-            case "coffin grave":
-                capacity = 2;
-                break;
-            case "double coffin grave":
-                capacity = 4;
-                break;
-            case "urn grave":
-                capacity = 4;
-                break;
-            case "columbarium":
-                capacity = 6;
-                break;
-            default: capacity = 2;
-        }
+        int capacity = switch (graveAttributes[0]) {
+            case "coffin grave" -> 2;
+            case "double coffin grave" -> 4;
+            case "urn grave" -> 4;
+            case "columbarium" -> 6;
+            default -> 2;
+        };
         graveCapacityMap.put(graveCount, capacity);
     }
 }

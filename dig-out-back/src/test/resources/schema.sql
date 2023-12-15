@@ -21,10 +21,10 @@ CREATE TABLE grave_owner (
     pesel VARCHAR(50),
     street VARCHAR(100),
     parcel VARCHAR(10),
-    city VARCHAR(10),
+    city VARCHAR(50),
     postal_code VARCHAR(10),
-    country VARCHAR(10),
-    phone_number VARCHAR(10)
+    country VARCHAR(50),
+    phone_number VARCHAR(50)
 );
 
 CREATE TABLE app_user (
@@ -53,13 +53,13 @@ ALTER TABLE grave ADD CONSTRAINT grave_localization
     ON DELETE CASCADE
 ;
 
-ALTER TABLE grave ADD CONSTRAINT grave_owner
+ALTER TABLE grave ADD CONSTRAINT grave_grave_owner_
     FOREIGN KEY (grave_owner)
     REFERENCES grave_owner (id)
     ON DELETE CASCADE
 ;
 
-ALTER TABLE app_user ADD CONSTRAINT grave_owner
+ALTER TABLE app_user ADD CONSTRAINT app_user_grave_owner
     FOREIGN KEY (grave_owner)
     REFERENCES grave_owner (id)
     ON DELETE CASCADE
