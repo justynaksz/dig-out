@@ -15,7 +15,7 @@ public class GraveOwnerDTO {
     private final String country;
     private final String phoneNumber;
 
-    public GraveOwnerDTO(int id, String firstName, String lastName, String pesel, String street, String parcel, 
+    public GraveOwnerDTO(int id, String firstName, String lastName, String pesel, String street, String parcel,
                          String city, String postalCode, String country, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;

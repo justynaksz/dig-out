@@ -1,22 +1,20 @@
 package com.digout.webapp.service.DTO;
 
-import com.digout.webapp.repository.cemetery.model.Grave;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class DeceasedDTO {
 
-    private int id;
-    private String firstName;
-    private String lastName;
-    private LocalDate birthDate;
-    private LocalDate deathDate;
-    private boolean isInfectiousDisease;
-    private Grave grave;
+    private final int id;
+    private final String firstName;
+    private final String lastName;
+    private final LocalDate birthDate;
+    private final LocalDate deathDate;
+    private final boolean isInfectiousDisease;
+    private final GraveDTO grave;
 
     public DeceasedDTO(int id, String firstName, String lastName, LocalDate birthDate, LocalDate deathDate,
-                       boolean isInfectiousDisease, Grave grave) {
+                       boolean isInfectiousDisease, GraveDTO grave) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,7 +48,7 @@ public class DeceasedDTO {
         return isInfectiousDisease;
     }
 
-    public Grave getGrave() {
+    public GraveDTO getGrave() {
         return grave;
     }
 
@@ -61,7 +59,10 @@ public class DeceasedDTO {
         DeceasedDTO that = (DeceasedDTO) o;
         return id == that.id && isInfectiousDisease == that.isInfectiousDisease
                 && Objects.equals(firstName, that.firstName)
-                && Objects.equals(lastName, that.lastName) && Objects.equals(birthDate, that.birthDate) && Objects.equals(deathDate, that.deathDate) && Objects.equals(grave, that.grave);
+                && Objects.equals(lastName, that.lastName)
+                && Objects.equals(birthDate, that.birthDate)
+                && Objects.equals(deathDate, that.deathDate)
+                && Objects.equals(grave, that.grave);
     }
 
     @Override

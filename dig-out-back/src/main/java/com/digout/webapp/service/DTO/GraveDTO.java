@@ -1,19 +1,17 @@
 package com.digout.webapp.service.DTO;
 
-import com.digout.webapp.repository.cemetery.model.GraveOwner;
-import com.digout.webapp.repository.cemetery.model.Localization;
 import java.util.Objects;
 
 public class GraveDTO {
 
     private final int id;
     private final String type;
-    private final Localization localization;
-    private final GraveOwner graveOwner;
+    private final LocalizationDTO localization;
+    private final GraveOwnerDTO graveOwner;
     private final String photo;
 
-    public GraveDTO(int id, String type, Localization localization, 
-                    GraveOwner graveOwner, String photo) {
+    public GraveDTO(int id, String type, LocalizationDTO localization,
+                    GraveOwnerDTO graveOwner, String photo) {
         this.id = id;
         this.type = type;
         this.localization = localization;
@@ -29,11 +27,11 @@ public class GraveDTO {
         return type;
     }
 
-    public Localization getLocalization() {
+    public LocalizationDTO getLocalization() {
         return localization;
     }
 
-    public GraveOwner getGraveOwner() {
+    public GraveOwnerDTO getGraveOwner() {
         return graveOwner;
     }
 

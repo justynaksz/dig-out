@@ -1,7 +1,5 @@
 package com.digout.webapp.service.DTO;
 
-import com.digout.webapp.repository.cemetery.model.GraveOwner;
-
 import java.util.Objects;
 
 public class AppUserDTO {
@@ -11,11 +9,11 @@ public class AppUserDTO {
     private final String password;
     private final String email;
     private final String role;
-    private final GraveOwner graveOwner;
+    private final GraveOwnerDTO graveOwner;
     private final String avatar;
 
     public AppUserDTO(int id, String nickname, String password, String email,
-                      String role, GraveOwner graveOwner, String avatar) {
+                      String role, GraveOwnerDTO graveOwner, String avatar) {
         this.id = id;
         this.nickname = nickname;
         this.password = password;
@@ -45,7 +43,7 @@ public class AppUserDTO {
         return role;
     }
 
-    public GraveOwner getGraveOwner() {
+    public GraveOwnerDTO getGraveOwner() {
         return graveOwner;
     }
 
