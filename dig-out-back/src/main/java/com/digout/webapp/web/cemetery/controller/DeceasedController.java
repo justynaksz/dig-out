@@ -24,6 +24,26 @@ public class DeceasedController {
         this.deceasedRepository = deceasedRepository;
     }
 
+    @GetMapping(path = "/birthdate")
+    public List<Deceased> findByBirthDateAnniversary() {
+        return deceasedRepository.findByBirthDateAnniversary();
+    }
+
+    @GetMapping(path = "/deathdate")
+    public List<Deceased> findByDeathDateAnniversary() {
+        return deceasedRepository.findByDeathDateAnniversary();
+    }
+
+    @GetMapping(path = "/grave/{id}")
+    public List<Deceased> findByGraveId(@PathVariable int id) {
+        return deceasedRepository.findByGraveId(id);
+    }
+
+    @GetMapping(path = "/search")
+    public List<Deceased> findByParams(@RequestBody Deceased deceased) {
+        return deceasedRepository.findByParams(deceased);
+    }
+
     @GetMapping
     public List<Deceased> findAll() {
         return deceasedRepository.findAll();

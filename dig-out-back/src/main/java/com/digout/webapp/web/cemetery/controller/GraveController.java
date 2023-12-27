@@ -1,6 +1,7 @@
 package com.digout.webapp.web.cemetery.controller;
 
 import com.digout.webapp.repository.cemetery.model.Grave;
+import com.digout.webapp.repository.cemetery.model.GraveOwner;
 import com.digout.webapp.repository.cemetery.repository.GraveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,11 @@ public class GraveController {
     @Autowired
     public GraveController(GraveRepository graveRepository) {
         this.graveRepository = graveRepository;
+    }
+
+    @GetMapping(path = "/owner")
+    public List<Grave> findByGraveOwner(GraveOwner graveOwner) {
+        return graveRepository.findByGraveOwner(graveOwner);
     }
 
     @GetMapping
