@@ -10,17 +10,17 @@ INSERT INTO grave_owner (first_name, last_name, pesel, street, parcel, city, pos
 INSERT INTO grave_owner (first_name, last_name, pesel, street, parcel, city, postal_code, country, phone_number) VALUES ('Susan', 'Austin', '88121417864', 'Viersene Strasse', '24A', 'Viersen', '12-784', 'Germany', '574-445-127');
 INSERT INTO grave_owner (first_name, last_name, pesel, street, parcel, city, postal_code, country, phone_number) VALUES ('John', 'Gross', NULL, 'Niepodleglosci', '14B/1', 'Wielowies', '24-576', 'Poland', '697-485-127');
 
-INSERT INTO grave (type, localization, grave_owner, photo) VALUES ('coffin grave', 4, 2, '123452023011812345');
-INSERT INTO grave (type, localization, grave_owner, photo) VALUES ('coffin grave', 1, 3, '123452023072512345');
-INSERT INTO grave (type, localization, grave_owner, photo) VALUES ('urn grave', 3, 1, '123452020011812345');
-INSERT INTO grave (type, localization, grave_owner, photo) VALUES ('columbarium', 5, 5, NULL);
-INSERT INTO grave (type, localization, grave_owner, photo) VALUES ('urn grave', 2, 4, '123452019110112345');
+INSERT INTO grave (type, localization, grave_owner, photo) VALUES ('coffin grave', 4, 2, '123452023011812345', true);
+INSERT INTO grave (type, localization, grave_owner, photo) VALUES ('coffin grave', 1, 3, '123452023072512345', true);
+INSERT INTO grave (type, localization, grave_owner, photo) VALUES ('urn grave', 3, 1, '123452020011812345', true);
+INSERT INTO grave (type, localization, grave_owner, photo) VALUES ('columbarium', 5, 5, NULL, true);
+INSERT INTO grave (type, localization, grave_owner, photo) VALUES ('urn grave', 2, 4, '123452019110112345', true);
 
-INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave) VALUES ('Noah', 'Gross', '1974-11-01', '2023-06-13', false, 5);
-INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave) VALUES ('Melody', 'Fletcher', '1942-07-29', '2004-01-16', false, 4);
-INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave) VALUES ('Vera', 'Park', '1991-07-01', '1999-02-28', true, 2);
-INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave) VALUES ('Adam', 'Norris', '1978-11-01', '2019-12-17', false, 1);
-INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave) VALUES ('Collin', 'Moody', '1964-04-19', '2023-01-07', false, 3);
+INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave) VALUES ('Noah', 'Gross', '1974-11-01', '2023-06-13', false, 5, '1236364364512345');
+INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave) VALUES ('Melody', 'Fletcher', '1942-07-29', '2004-01-16', false, 4, '1234564564512345');
+INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave) VALUES ('Vera', 'Park', '1991-07-01', '1999-02-28', true, 2, '1234564643512345');
+INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave) VALUES ('Adam', 'Norris', '1978-11-01', '2019-12-17', false, 1, '123457656542512345');
+INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave) VALUES ('Collin', 'Moody', '1964-04-19', '2023-01-07', false, 3, '1234564565412345');
 
 INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, avatar) VALUES ('dbesciak', 'aloha', 'dbesciak@gmail.com', 'USER', 4, NULL);
 INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, avatar) VALUES ('administrator', 'difficultPassword', 'administrator@dig-out.com', 'ADMIN', NULL, '123452011142512345');

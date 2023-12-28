@@ -43,10 +43,15 @@ public class Deceased {
     @JoinColumn(name = "grave", referencedColumnName = "id", nullable = false)
     private Grave grave;
 
+    @Column
+    private String photo;
+
+
     public Deceased() {
     }
 
-    public Deceased(int id, String firstName, String lastName, LocalDate birthDate, LocalDate deathDate, boolean isInfectiousDisease, Grave grave) {
+    public Deceased(int id, String firstName, String lastName, LocalDate birthDate,
+                    LocalDate deathDate, boolean isInfectiousDisease, Grave grave, String photo) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -54,6 +59,7 @@ public class Deceased {
         this.deathDate = deathDate;
         this.isInfectiousDisease = isInfectiousDisease;
         this.grave = grave;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -112,17 +118,28 @@ public class Deceased {
         this.grave = grave;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Deceased deceased = (Deceased) o;
-        return id == deceased.id && isInfectiousDisease == deceased.isInfectiousDisease && Objects.equals(firstName, deceased.firstName) && Objects.equals(lastName, deceased.lastName) && Objects.equals(birthDate, deceased.birthDate) && Objects.equals(deathDate, deceased.deathDate) && Objects.equals(grave, deceased.grave);
+        return id == deceased.id && isInfectiousDisease == deceased.isInfectiousDisease
+                && Objects.equals(firstName, deceased.firstName) && Objects.equals(lastName, deceased.lastName)
+                && Objects.equals(birthDate, deceased.birthDate) && Objects.equals(deathDate, deceased.deathDate)
+                && Objects.equals(grave, deceased.grave) && Objects.equals(photo, deceased.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, birthDate, deathDate, isInfectiousDisease, grave);
+        return Objects.hash(id, firstName, lastName, birthDate, deathDate, isInfectiousDisease, grave, photo);
     }
 
     @Override
@@ -135,6 +152,7 @@ public class Deceased {
                 ", deathDate=" + deathDate +
                 ", isInfectiousDisease=" + isInfectiousDisease +
                 ", grave=" + grave +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 }

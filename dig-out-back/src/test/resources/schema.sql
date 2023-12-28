@@ -11,7 +11,8 @@ CREATE TABLE grave (
 	type VARCHAR(20),
 	localization INT NOT NULL,
 	grave_owner INT,
-	photo VARCHAR(200)
+	photo VARCHAR(200),
+	is_place_available boolean
 );
 
 CREATE TABLE grave_owner (
@@ -44,7 +45,8 @@ CREATE TABLE deceased (
 	birth_date DATE,
 	death_date DATE,
 	is_infectious_disease boolean,
-	grave INT NOT NULL
+	grave INT NOT NULL,
+	photo VARCHAR(200)
 );
 
 ALTER TABLE grave ADD CONSTRAINT grave_localization

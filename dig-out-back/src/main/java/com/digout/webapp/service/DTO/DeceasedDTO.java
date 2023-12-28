@@ -13,8 +13,10 @@ public class DeceasedDTO {
     private final boolean isInfectiousDisease;
     private final GraveDTO grave;
 
+    private final String photo;
+
     public DeceasedDTO(int id, String firstName, String lastName, LocalDate birthDate, LocalDate deathDate,
-                       boolean isInfectiousDisease, GraveDTO grave) {
+                       boolean isInfectiousDisease, GraveDTO grave, String photo) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,6 +24,7 @@ public class DeceasedDTO {
         this.deathDate = deathDate;
         this.isInfectiousDisease = isInfectiousDisease;
         this.grave = grave;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -52,21 +55,23 @@ public class DeceasedDTO {
         return grave;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeceasedDTO that = (DeceasedDTO) o;
         return id == that.id && isInfectiousDisease == that.isInfectiousDisease
-                && Objects.equals(firstName, that.firstName)
-                && Objects.equals(lastName, that.lastName)
-                && Objects.equals(birthDate, that.birthDate)
-                && Objects.equals(deathDate, that.deathDate)
-                && Objects.equals(grave, that.grave);
+                && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName)
+                && Objects.equals(birthDate, that.birthDate) && Objects.equals(deathDate, that.deathDate)
+                && Objects.equals(grave, that.grave) && Objects.equals(photo, that.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, birthDate, deathDate, isInfectiousDisease, grave);
+        return Objects.hash(id, firstName, lastName, birthDate, deathDate, isInfectiousDisease, grave, photo);
     }
 }

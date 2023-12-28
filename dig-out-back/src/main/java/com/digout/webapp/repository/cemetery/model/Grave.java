@@ -35,15 +35,20 @@ public class Grave {
     @Column
     private String photo;
 
+    @Column
+    private boolean isPlaceAvailable;
+
     public Grave() {
     }
 
-    public Grave(int id, String type, Localization localization, GraveOwner graveOwner, String photo) {
+    public Grave(int id, String type, Localization localization, GraveOwner graveOwner,
+                 String photo, boolean isPlaceAvailable) {
         this.id = id;
         this.type = type;
         this.localization = localization;
         this.graveOwner = graveOwner;
         this.photo = photo;
+        this.isPlaceAvailable = isPlaceAvailable;
     }
 
     public int getId() {
@@ -86,17 +91,27 @@ public class Grave {
         this.photo = photo;
     }
 
+    public boolean isPlaceAvailable() {
+        return isPlaceAvailable;
+    }
+
+    public void setPlaceAvailable(boolean placeAvailable) {
+        isPlaceAvailable = placeAvailable;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Grave grave = (Grave) o;
-        return id == grave.id && Objects.equals(type, grave.type) && Objects.equals(localization, grave.localization) && Objects.equals(graveOwner, grave.graveOwner) && Objects.equals(photo, grave.photo);
+        return id == grave.id && isPlaceAvailable == grave.isPlaceAvailable
+                && Objects.equals(type, grave.type) && Objects.equals(localization, grave.localization)
+                && Objects.equals(graveOwner, grave.graveOwner) && Objects.equals(photo, grave.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, localization, graveOwner, photo);
+        return Objects.hash(id, type, localization, graveOwner, photo, isPlaceAvailable);
     }
 
     @Override
@@ -105,8 +120,9 @@ public class Grave {
                 "id=" + id +
                 ", type='" + type + '\'' +
                 ", localization=" + localization +
-                ", graveOwner='" + graveOwner + '\'' +
+                ", graveOwner=" + graveOwner +
                 ", photo='" + photo + '\'' +
+                ", isPlaceAvailable=" + isPlaceAvailable +
                 '}';
     }
 }

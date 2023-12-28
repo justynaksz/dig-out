@@ -9,14 +9,18 @@ public class GraveDTO {
     private final LocalizationDTO localization;
     private final GraveOwnerDTO graveOwner;
     private final String photo;
+    private final boolean isPlaceAvailable;
 
-    public GraveDTO(int id, String type, LocalizationDTO localization,
-                    GraveOwnerDTO graveOwner, String photo) {
+
+
+    public GraveDTO(int id, String type, LocalizationDTO localization, GraveOwnerDTO graveOwner,
+                    String photo, boolean isPlaceAvailable) {
         this.id = id;
         this.type = type;
         this.localization = localization;
         this.graveOwner = graveOwner;
         this.photo = photo;
+        this.isPlaceAvailable = isPlaceAvailable;
     }
 
     public int getId() {
@@ -39,19 +43,22 @@ public class GraveDTO {
         return photo;
     }
 
+    public boolean isPlaceAvailable() {
+        return isPlaceAvailable;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GraveDTO graveDTO = (GraveDTO) o;
-        return id == graveDTO.id && Objects.equals(type, graveDTO.type)
-                && Objects.equals(localization, graveDTO.localization)
-                && Objects.equals(graveOwner, graveDTO.graveOwner)
-                && Objects.equals(photo, graveDTO.photo);
+        return id == graveDTO.id && isPlaceAvailable == graveDTO.isPlaceAvailable
+                && Objects.equals(type, graveDTO.type) && Objects.equals(localization, graveDTO.localization)
+                && Objects.equals(graveOwner, graveDTO.graveOwner) && Objects.equals(photo, graveDTO.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, localization, graveOwner, photo);
+        return Objects.hash(id, type, localization, graveOwner, photo, isPlaceAvailable);
     }
 }

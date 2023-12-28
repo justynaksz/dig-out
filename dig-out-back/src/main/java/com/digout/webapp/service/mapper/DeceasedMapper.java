@@ -23,7 +23,8 @@ public class DeceasedMapper {
         var deathDate = deceasedDTO.getDeathDate();
         var isInfectiousDisease = deceasedDTO.isInfectiousDisease();
         var grave = graveMapper.toModel(deceasedDTO.getGrave());
-        return new Deceased(id, firstName, lastName, birthDate, deathDate, isInfectiousDisease, grave);
+        var photo = deceasedDTO.getPhoto();
+        return new Deceased(id, firstName, lastName, birthDate, deathDate, isInfectiousDisease, grave, photo);
     }
 
     public DeceasedDTO toDTO(Deceased deceased) {
@@ -34,6 +35,7 @@ public class DeceasedMapper {
         var deathDate = deceased.getDeathDate();
         var isInfectiousDisease = deceased.isInfectiousDisease();
         var grave = graveMapper.toDTO(deceased.getGrave());
-        return new DeceasedDTO(id, firstName, lastName, birthDate, deathDate, isInfectiousDisease, grave);
+        var photo = deceased.getPhoto();
+        return new DeceasedDTO(id, firstName, lastName, birthDate, deathDate, isInfectiousDisease, grave, photo);
     }
 }

@@ -23,7 +23,8 @@ public class GraveMapper {
         var localization = localizationMapper.toModel(graveDTO.getLocalization());
         var graveOwner = graveOwnerMapper.toModel(graveDTO.getGraveOwner());
         var photo = graveDTO.getPhoto();
-        return new Grave(id, type, localization, graveOwner, photo);
+        var isPlaceAvailable = graveDTO.isPlaceAvailable();
+        return new Grave(id, type, localization, graveOwner, photo, isPlaceAvailable);
     }
 
     public GraveDTO toDTO(Grave grave) {
@@ -32,6 +33,7 @@ public class GraveMapper {
         var localization = localizationMapper.toDTO(grave.getLocalization());
         var graveOwner = graveOwnerMapper.toDTO(grave.getGraveOwner());
         var photo = grave.getPhoto();
-        return new GraveDTO(id, type, localization, graveOwner, photo);
+        var isPlaceAvailable = grave.isPlaceAvailable();
+        return new GraveDTO(id, type, localization, graveOwner, photo, isPlaceAvailable);
     }
 }
