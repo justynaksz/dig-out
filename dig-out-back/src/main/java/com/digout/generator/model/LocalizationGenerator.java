@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -30,6 +31,10 @@ public class LocalizationGenerator{
 
     public List<String> getGraveList() {
         return graveGenerator.getGravesList();
+    }
+
+    public List<String> getUpdateGraveList(Map<Integer, Integer> capacityMap) {
+        return graveGenerator.getUpdateGravesList(capacityMap);
     }
 
     private void fulfillCemetery() {

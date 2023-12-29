@@ -4,6 +4,7 @@ import com.digout.generator.inputreader.InputReader;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,11 +28,16 @@ public class DeceasedGenerator {
         return deceasedList;
     }
 
+    public Map<Integer, Integer> getGraveCapacityMap() {
+        return graveCapacityMap;
+    }
+
     private void generateDeceased() {
         String deceased = getNameAndSurname() + "," +
                 getBirthAndDeathDate() + "," +
                 isInfectiousDisease() + "," +
-                getGraveId();
+                getGraveId() + "," +
+                generatePhotoReference();
         deceasedList.add(deceased);
     }
 
@@ -113,9 +119,7 @@ public class DeceasedGenerator {
     }
 
     private String getDatesAsString(LocalDate birthDate, LocalDate deathDate) {
-        String stringBuilder = birthDate + "," +
-                deathDate;
-        return stringBuilder;
+        return birthDate + "," + deathDate;
     }
 
     private LocalDate birthDateCalculator(int startYear, int endYear) {
@@ -188,5 +192,19 @@ public class DeceasedGenerator {
             default -> 2;
         };
         graveCapacityMap.put(graveCount, capacity);
+    }
+
+    private String generatePhotoReference() {
+        int randomNumber = random.nextInt(1, 100);
+        if (randomNumber <= 90) {
+            return "NULL";
+        } else {
+            return LocalDateTime.now().toString()
+                    .replace("T", "")
+                    .replace(":", "")
+                    .replace("-", "")
+                    .replace(".", "")
+                    + random.nextInt(100, 999);
+        }
     }
 }

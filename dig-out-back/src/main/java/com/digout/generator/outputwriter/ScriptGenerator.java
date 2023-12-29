@@ -27,6 +27,7 @@ public class ScriptGenerator {
         generateDeceasedScripts(expected);
         generateAppUserScripts(expected);
         generateGraveOwnerScripts(expected);
+        generateUpdateGraveScripts();
     }
 
     private void generateLocalizationScripts(int expected) {
@@ -37,7 +38,8 @@ public class ScriptGenerator {
 
             for (String localization : localizationList) {
                 String[] localizationAttributes = localization.split(",");
-                String stringBuilder = "INSERT INTO localization (cemetery, quarter, localization_row, localization_column) VALUES (" +
+                String stringBuilder = "INSERT INTO localization (cemetery, quarter, localization_row, " +
+                        "localization_column) VALUES (" +
                         "'" + localizationAttributes[0] + "'," +
                         "'" + localizationAttributes[1] + "'," +
                         "'" + localizationAttributes[2] + "'," +
@@ -61,7 +63,8 @@ public class ScriptGenerator {
             for (String grave : graveList) {
                 String[] graveAttributes = grave.split(",");
                 StringBuilder graveBuilder = new StringBuilder();
-                graveBuilder.append("INSERT INTO grave (type, localization, grave_owner, photo) VALUES (");
+                graveBuilder.append("INSERT INTO grave (type, localization, grave_owner, photo, " +
+                        "is_place_available) VALUES (");
                 graveBuilder.append("'").append(graveAttributes[0]).append("',");
                 graveBuilder.append("'").append(graveAttributes[1]).append("',");
                 if (graveAttributes[2].equals("NULL")) {
@@ -72,8 +75,9 @@ public class ScriptGenerator {
                 if (graveAttributes[3].equals("NULL")) {
                     graveBuilder.append(graveAttributes[3]).append(");");
                 } else {
-                    graveBuilder.append("'").append(graveAttributes[3]).append("');");
+                    graveBuilder.append("'").append(graveAttributes[3]).append("',");
                 }
+                graveBuilder.append("true").append(");");
                 bufferedWriter.write(graveBuilder.toString());
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
@@ -94,13 +98,15 @@ public class ScriptGenerator {
 
             for (String deceased : deceasedList) {
                 String[] deceasedAttributes = deceased.split(",");
-                String deceasedBuilder = "INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave) VALUES (" +
+                String deceasedBuilder = "INSERT INTO deceased (first_name, last_name, birth_date, death_date, " +
+                        "is_infectious_disease, grave, photo) VALUES (" +
                         "'" + deceasedAttributes[0] + "'," +
                         "'" + deceasedAttributes[1] + "'," +
                         "'" + deceasedAttributes[2] + "'," +
                         "'" + deceasedAttributes[3] + "'," +
                         "'" + deceasedAttributes[4] + "'," +
-                        "'" + deceasedAttributes[5] + "');";
+                        "'" + deceasedAttributes[5] + "'," +
+                        "'" + deceasedAttributes[6] + "');";
                 bufferedWriter.write(deceasedBuilder);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
@@ -121,7 +127,8 @@ public class ScriptGenerator {
                 String[] appUserAttributes = appUser.split(",");
 
                 StringBuilder appUserBuilder = new StringBuilder();
-                appUserBuilder.append("INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, avatar) VALUES (");
+                appUserBuilder.append("INSERT INTO app_user (nickname, password, e_mail, role," +
+                        " grave_owner, avatar) VALUES (");
                 appUserBuilder.append("'").append(appUserAttributes[0]).append("',");
                 appUserBuilder.append("'").append(appUserAttributes[1]).append("',");
                 appUserBuilder.append("'").append(appUserAttributes[2]).append("',");
@@ -156,7 +163,8 @@ public class ScriptGenerator {
                 String[] graveOwnerAttributes = graveOwner.split(",");
 
                 StringBuilder graveOwnerBuilder = new StringBuilder();
-                graveOwnerBuilder.append("INSERT INTO grave_owner (first_name, last_name, pesel, street, parcel, city, postal_code, country, phone_number) VALUES (");
+                graveOwnerBuilder.append("INSERT INTO grave_owner (first_name, last_name, pesel, street, parcel, city, " +
+                        "postal_code, country, phone_number) VALUES (");
                 graveOwnerBuilder.append("'").append(graveOwnerAttributes[0]).append("',");
                 graveOwnerBuilder.append("'").append(graveOwnerAttributes[1]).append("',");
                 if (graveOwnerAttributes[2].equals("NULL")) {
@@ -204,4 +212,19 @@ public class ScriptGenerator {
         }
     }
 
+    void generateUpdateGraveScripts() {
+        List<String> gravesToUpdate = localizationGenerator.getUpdateGraveList(deceasedGenerator.getGraveCapacityMap());
+        String graveOwnerOutputPath = "dig-out-back\\src\\main\\resources\\output\\grave_update.sql";
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(graveOwnerOutputPath))) {
+            for(String graveId : gravesToUpdate) {
+                String updateQuery = "UPDATE grave SET is_place_available = false WHERE ID = " + graveId;
+                bufferedWriter.write(updateQuery.toString());
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
+            }
+            logger.debug("{} graves has been updated.", gravesToUpdate.size());
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+    }
 }

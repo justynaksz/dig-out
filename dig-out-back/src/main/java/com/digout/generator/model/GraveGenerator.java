@@ -3,6 +3,7 @@ package com.digout.generator.model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class GraveGenerator {
@@ -30,6 +31,15 @@ public class GraveGenerator {
         return gravesList;
     }
 
+    public List<String> getUpdateGravesList(Map<Integer, Integer> capacityMap) {
+        List<String> gravesToBeUpdated = new ArrayList<>();
+        for(Map.Entry<Integer, Integer> entry : capacityMap.entrySet()) {
+            if (entry.getValue() == 0) {
+                gravesToBeUpdated.add(entry.getKey().toString());
+            }
+        }
+        return gravesToBeUpdated;
+    }
     private String pickGraveType() {
         int typeNumber = random.nextInt(0, 3);
         return graveTypes[typeNumber];
