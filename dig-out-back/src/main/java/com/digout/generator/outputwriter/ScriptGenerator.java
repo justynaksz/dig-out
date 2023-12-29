@@ -73,7 +73,7 @@ public class ScriptGenerator {
                     graveBuilder.append("'").append(graveAttributes[2]).append("',");
                 }
                 if (graveAttributes[3].equals("NULL")) {
-                    graveBuilder.append(graveAttributes[3]).append(");");
+                    graveBuilder.append(graveAttributes[3]).append(",");
                 } else {
                     graveBuilder.append("'").append(graveAttributes[3]).append("',");
                 }
@@ -217,7 +217,7 @@ public class ScriptGenerator {
         String graveOwnerOutputPath = "dig-out-back\\src\\main\\resources\\output\\grave_update.sql";
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(graveOwnerOutputPath))) {
             for(String graveId : gravesToUpdate) {
-                String updateQuery = "UPDATE grave SET is_place_available = false WHERE ID = " + graveId;
+                String updateQuery = "UPDATE grave SET is_place_available = false WHERE ID = " + graveId + ";";
                 bufferedWriter.write(updateQuery.toString());
                 bufferedWriter.newLine();
                 bufferedWriter.flush();

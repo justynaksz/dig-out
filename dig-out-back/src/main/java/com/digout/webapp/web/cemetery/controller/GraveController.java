@@ -26,8 +26,13 @@ public class GraveController {
     }
 
     @GetMapping(path = "/owner")
-    public List<Grave> findByGraveOwner(GraveOwner graveOwner) {
+    public List<Grave> findByGraveOwner(@RequestBody GraveOwner graveOwner) {
         return graveRepository.findByGraveOwner(graveOwner);
+    }
+
+    @GetMapping(path = "/available")
+    public List<Grave> findAvailableByCemetery(@RequestBody String cemetery) {
+        return graveRepository.findAvailableByCemetery(cemetery);
     }
 
     @GetMapping
