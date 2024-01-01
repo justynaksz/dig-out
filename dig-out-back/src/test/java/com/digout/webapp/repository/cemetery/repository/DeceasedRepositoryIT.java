@@ -28,6 +28,50 @@ class DeceasedRepositoryIT {
     private DeceasedRepository deceasedRepository;
 
     @Test
+    @Transactional
+    @DisplayName("DECEASED - find by birthday")
+    void findByBirthdayShouldReturnDeceasedWithBirthdayOnCurrentDay() {
+        // GIVEN
+        LocalDate today = LocalDate.now();
+        var localization = new Localization(1, "New moon cemetery", "A1", "7", "18");
+        var graveOwner = new GraveOwner(3, "Robert", "Watson", null, null, null, null, null, null, null);
+        var grave = new Grave(2, "coffin grave", localization, graveOwner, "123452023072512345", true);
+        var deceasedWithBirthday = new Deceased(6, "Joseph", "Smith",
+                LocalDate.of(1987, today.getMonth(), today.getDayOfMonth()),
+                LocalDate.of(1999, 12, 31),
+                false, grave, "12345275475412345");
+        var deceasedWithBirthdayList = new ArrayList<>();
+        deceasedWithBirthdayList.add(deceasedWithBirthday);
+        // WHEN
+        deceasedRepository.save(deceasedWithBirthday);
+        var deceasedRetrieved = deceasedRepository.findByBirthDateAnniversary();
+        // THEN
+        assertEquals(deceasedWithBirthdayList, deceasedRetrieved);
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("DECEASED - find by death date")
+    void findByDeathDayShouldReturnDeceasedWithDeathAnniversaryOnCurrentDay() {
+        // GIVEN
+        LocalDate today = LocalDate.now();
+        var localization = new Localization(1, "New moon cemetery", "A1", "7", "18");
+        var graveOwner = new GraveOwner(3, "Robert", "Watson", null, null, null, null, null, null, null);
+        var grave = new Grave(2, "coffin grave", localization, graveOwner, "123452023072512345", true);
+        var deceasedWithDeathAnniversary = new Deceased(6, "Joseph", "Smith",
+                LocalDate.of(1941, 12, 31),
+                LocalDate.of(1987, today.getMonth(), today.getDayOfMonth()),
+                false, grave, "12345275475412345");
+        var deceasedWithDeathAnniversaryList = new ArrayList<>();
+        deceasedWithDeathAnniversaryList.add(deceasedWithDeathAnniversary);
+        // WHEN
+        deceasedRepository.save(deceasedWithDeathAnniversary);
+        var deceasedRetrieved = deceasedRepository.findByDeathDateAnniversary();
+        // THEN
+        assertEquals(deceasedWithDeathAnniversaryList, deceasedRetrieved);
+    }
+
+    @Test
     @DisplayName("DECEASED - find all test")
     void findAllShouldReturnListOfAllDeceased() {
         // GIVEN
@@ -85,6 +129,96 @@ class DeceasedRepositoryIT {
             var deceasedRetrieved = deceasedRepository.findById(id);
             // THEN
             assertEquals(deceased, deceasedRetrieved);
+        }
+    }
+
+    @Nested
+    @DisplayName("DECEASED - find by params")
+    class findByParams {
+        @Test
+        @Transactional
+        @DisplayName("find by cemetery name")
+        void findByCemeteryNameShouldReturnCorrectDeceased() {
+            // GIVEN
+            var cemetery = "New moon cemetery";
+            // WHEN
+            var localization1 = new Localization(3, "New moon cemetery", "B4", "4", "A");
+            var graveOwner1 = new GraveOwner(1, "Emily", "Blunt", "88121417864", "5th Avenue", "18", "Brigthtown", "47-427", "Great Britain", "459-782-145");
+            var grave1 = new Grave(3, "urn grave", localization1, graveOwner1, "123452020011812345", true);
+            var deceased1 = new Deceased(5, "Collin", "Moody", LocalDate.of(1964, 4, 19),
+                    LocalDate.of(2023, 1, 7), false, grave1, "1234564565412345");
+            var localization2 = new Localization(1, "New moon cemetery", "A1", "7", "18");
+            var graveOwner2 = new GraveOwner(3, "Robert", "Watson", null, null, null, null, null, null, null);
+            var grave2 = new Grave(2, "coffin grave", localization2, graveOwner2, "123452023072512345", true);
+            var deceased2 = new Deceased(3, "Vera", "Park", LocalDate.of(1991, 7, 1),
+                    LocalDate.of(1999, 2, 28), true, grave2, "1234564643512345");
+            var deceasedByCemetery = new ArrayList<>();
+            deceasedByCemetery.add(deceased1);
+            deceasedByCemetery.add(deceased2);
+            var localizationWithParam = new Localization(0, cemetery, null,
+                    null, null);
+            var graveWithParam = new Grave(0, null, localizationWithParam, null,
+                    null, true);
+            var deceasedWithParam = new Deceased(0, null, null, null, null,
+                    false, graveWithParam, null);
+            var deceasedRetrievedByCemetery = deceasedRepository.findByParams(deceasedWithParam);
+            // THEN
+            assertEquals(deceasedByCemetery.size(), deceasedRetrievedByCemetery.size());
+            assertTrue(deceasedByCemetery.containsAll(deceasedRetrievedByCemetery));
+            assertTrue(deceasedRetrievedByCemetery.containsAll(deceasedByCemetery));
+        }
+
+        @Test
+        @Transactional
+        @DisplayName("find by deceased name")
+        void findByDeceasedNameShouldReturnCorrectDeceased() {
+            // GIVEN
+            var name = "Collin";
+            var surname = "Moody";
+            // WHEN
+            var localization = new Localization(3, "New moon cemetery", "B4", "4", "A");
+            var graveOwner = new GraveOwner(1, "Emily", "Blunt", "88121417864", "5th Avenue", "18", "Brigthtown", "47-427", "Great Britain", "459-782-145");
+            var grave = new Grave(3, "urn grave", localization, graveOwner, "123452020011812345", true);
+            var deceased = new Deceased(5, "Collin", "Moody", LocalDate.of(1964, 4, 19),
+                    LocalDate.of(2023, 1, 7), false, grave, "1234564565412345");
+            var localizationWithParam = new Localization(0, null, null,
+                    null, null);
+            var graveWithParam = new Grave(0, null, localizationWithParam, null,
+                    null, true);
+            var deceasedByName = new Deceased(0, name, surname, null, null,
+                    false, graveWithParam, null);
+            var deceasedRetrievedByName = deceasedRepository.findByParams(deceasedByName);
+            // THEN
+            assertEquals(deceasedByName, deceasedByName);
+        }
+
+        @Test
+        @Transactional
+        @DisplayName("find by cemetery and deceased name")
+        void findByCemeteryAndDeceasedNameShouldReturnCorrectDeceased() {
+            // GIVEN
+            var cemetery = "New moon cemetery";
+            var name = "Vera";
+            var surname = "Park";
+            // WHEN
+            var localization = new Localization(1, "New moon cemetery", "A1", "7", "18");
+            var graveOwner = new GraveOwner(3, "Robert", "Watson", null, null, null, null, null, null, null);
+            var grave = new Grave(2, "coffin grave", localization, graveOwner, "123452023072512345", true);
+            var deceased = new Deceased(3, "Vera", "Park", LocalDate.of(1991, 7, 1),
+                    LocalDate.of(1999, 2, 28), true, grave, "1234564643512345");
+            var deceasedByCemetery = new ArrayList<>();
+            deceasedByCemetery.add(deceased);
+            var localizationWithParam = new Localization(0, cemetery, null,
+                    null, null);
+            var graveWithParam = new Grave(0, null, localizationWithParam, null,
+                    null, true);
+            var deceasedWithParam = new Deceased(0, name, surname, null, null,
+                    false, graveWithParam, null);
+            var deceasedRetrievedByCemetery = deceasedRepository.findByParams(deceasedWithParam);
+            // THEN
+            assertEquals(deceasedByCemetery.size(), deceasedRetrievedByCemetery.size());
+            assertTrue(deceasedByCemetery.containsAll(deceasedRetrievedByCemetery));
+            assertTrue(deceasedRetrievedByCemetery.containsAll(deceasedByCemetery));
         }
     }
 
