@@ -24,6 +24,26 @@ class LocalizationRepositoryIT {
     private LocalizationRepository localizationRepository;
 
     @Test
+    @DisplayName("LOCALIZATION - get cemeteries")
+    void getCemeteriesListShouldReturnListOfAllCemeteriesInLocalizationTable() {
+        // GIVEN
+        var cemetery1 = "New moon cemetery";
+        var cemetery2 = "Rest in peace cemetery";
+        var cemetery3 = "Oak valley cemetery";
+        var cemetery4 = "Green hills cemetery";
+        var cemeteries = new ArrayList<String>();
+        cemeteries.add(cemetery1);
+        cemeteries.add(cemetery2);
+        cemeteries.add(cemetery3);
+        cemeteries.add(cemetery4);
+        // WHEN
+        var cemeteriesRetrieved = localizationRepository.getCemeteriesList();
+        // THEN
+        assertEquals(cemeteries.size(), cemeteriesRetrieved.size());
+        assertTrue(cemeteries.containsAll(cemeteriesRetrieved));
+        assertTrue(cemeteriesRetrieved.containsAll(cemeteries));
+    }
+    @Test
     @DisplayName("LOCALIZATION - find all test")
     void findAllShouldReturnListOfAllLocalizations() {
         // GIVEN
