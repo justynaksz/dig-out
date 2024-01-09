@@ -1,7 +1,7 @@
 package com.digout.webapp.service.service;
 
-import com.digout.webapp.repository.cemetery.model.AppUser;
-import com.digout.webapp.repository.cemetery.repository.AppUserRepository;
+import com.digout.webapp.repository.model.AppUser;
+import com.digout.webapp.repository.repository.AppUserRepository;
 import com.digout.webapp.service.DTO.AppUserDTO;
 import com.digout.webapp.service.exeption.EmptyResultException;
 import com.digout.webapp.service.exeption.InvalidInputException;
@@ -58,8 +58,8 @@ public class AppUserService {
         appUserRepository.deleteById(id);
     }
 
-    // TODO user validation
-    public AppUserDTO save(AppUserDTO appUserDTO) {
+    public AppUserDTO save(AppUserDTO appUserDTO) throws InvalidInputException {
+        appUserValidator.isValid(appUserDTO);
         var appUser = appUserMapper.toModel(appUserDTO);
         return appUserMapper.toDTO(appUserRepository.save(appUser));
     }

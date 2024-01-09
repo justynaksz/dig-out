@@ -2,7 +2,7 @@ package com.digout.webapp.service.DTO;
 
 import java.util.Objects;
 
-public class GraveOwnerDTO {
+public class GraveOwnerDTO implements DTO {
 
     private final int id;
     private final String firstName;

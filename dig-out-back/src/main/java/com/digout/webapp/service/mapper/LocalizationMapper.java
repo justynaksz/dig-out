@@ -1,6 +1,6 @@
 package com.digout.webapp.service.mapper;
 
-import com.digout.webapp.repository.cemetery.model.Localization;
+import com.digout.webapp.repository.model.Localization;
 import com.digout.webapp.service.DTO.LocalizationDTO;
 import org.springframework.stereotype.Component;
 

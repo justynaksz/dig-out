@@ -1,4 +1,4 @@
-package com.digout.webapp.repository.cemetery.model;
+package com.digout.webapp.repository.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

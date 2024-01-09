@@ -1,7 +1,7 @@
 package com.digout.webapp.web.cemetery.controller;
 
-import com.digout.webapp.repository.cemetery.model.Deceased;
-import com.digout.webapp.repository.cemetery.repository.DeceasedRepository;
+import com.digout.webapp.repository.model.Deceased;
+import com.digout.webapp.repository.repository.DeceasedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

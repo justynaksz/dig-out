@@ -1,6 +1,6 @@
 package com.digout.webapp.service.mapper;
 
-import com.digout.webapp.repository.cemetery.model.Grave;
+import com.digout.webapp.repository.model.Grave;
 import com.digout.webapp.service.DTO.GraveDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

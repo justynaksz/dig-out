@@ -35,7 +35,7 @@ public class AppUserGenerator {
         String nickname = getAdminNickname();
         String adminUser = nickname + ',' + generateNicknameOrPassword() + ','
                 + generateAminEmail(nickname) + ',' + admin + ',' + NULL + ','
-                + generateAvatarReference();
+                + generatePhotoReference();
         allUserList.add(adminUser);
     }
 
@@ -43,7 +43,7 @@ public class AppUserGenerator {
         String user = "USER";
         String appUser = getNickname() + ',' + generateNicknameOrPassword() + ','
                 + generateEmail() + ',' + user + ',' + getGraveOwnerNumber(graveOwnersCount)
-                +',' + generateAvatarReference();
+                +',' + generatePhotoReference();
         allUserList.add(appUser);
     }
 
@@ -137,7 +137,7 @@ public class AppUserGenerator {
         }
     }
 
-    private String generateAvatarReference() {
+    private String generatePhotoReference() {
         int randomNumber = random.nextInt(1, 100);
         if (randomNumber <= 90) {
             return NULL;

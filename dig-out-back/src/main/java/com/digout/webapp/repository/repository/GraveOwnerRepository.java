@@ -1,6 +1,6 @@
-package com.digout.webapp.repository.cemetery.repository;
+package com.digout.webapp.repository.repository;
 
-import com.digout.webapp.repository.cemetery.model.GraveOwner;
+import com.digout.webapp.repository.model.GraveOwner;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

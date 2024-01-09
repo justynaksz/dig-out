@@ -1,7 +1,7 @@
 package com.digout.webapp.service.service;
 
-import com.digout.webapp.repository.cemetery.model.Localization;
-import com.digout.webapp.repository.cemetery.repository.LocalizationRepository;
+import com.digout.webapp.repository.model.Localization;
+import com.digout.webapp.repository.repository.LocalizationRepository;
 import com.digout.webapp.service.DTO.LocalizationDTO;
 import com.digout.webapp.service.exeption.EmptyResultException;
 import com.digout.webapp.service.exeption.InvalidInputException;

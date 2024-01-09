@@ -2,7 +2,7 @@ package com.digout.webapp.service.DTO;
 
 import java.util.Objects;
 
-public class GraveDTO {
+public class GraveDTO implements DTO {
 
     private final int id;
     private final String type;

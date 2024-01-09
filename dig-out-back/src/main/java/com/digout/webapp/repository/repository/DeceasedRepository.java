@@ -1,6 +1,6 @@
-package com.digout.webapp.repository.cemetery.repository;
+package com.digout.webapp.repository.repository;
 
-import com.digout.webapp.repository.cemetery.model.Deceased;
+import com.digout.webapp.repository.model.Deceased;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

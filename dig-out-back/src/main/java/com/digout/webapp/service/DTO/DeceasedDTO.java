@@ -3,7 +3,7 @@ package com.digout.webapp.service.DTO;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class DeceasedDTO {
+public class DeceasedDTO implements DTO {
 
     private final int id;
     private final String firstName;

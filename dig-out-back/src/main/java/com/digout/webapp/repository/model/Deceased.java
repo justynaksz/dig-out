@@ -1,4 +1,4 @@
-package com.digout.webapp.repository.cemetery.model;
+package com.digout.webapp.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.CascadeType;

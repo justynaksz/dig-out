@@ -1,6 +1,6 @@
-package com.digout.webapp.repository.cemetery.repository;
+package com.digout.webapp.repository.repository;
 
-import com.digout.webapp.repository.cemetery.model.Localization;
+import com.digout.webapp.repository.model.Localization;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

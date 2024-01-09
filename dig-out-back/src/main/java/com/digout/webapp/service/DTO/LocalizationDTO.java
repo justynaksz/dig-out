@@ -2,7 +2,7 @@ package com.digout.webapp.service.DTO;
 
 import java.util.Objects;
 
-public class LocalizationDTO {
+public class LocalizationDTO implements DTO {
 
 
     private final int id;

@@ -1,6 +1,6 @@
 package com.digout.webapp.service.mapper;
 
-import com.digout.webapp.repository.cemetery.model.GraveOwner;
+import com.digout.webapp.repository.model.GraveOwner;
 import com.digout.webapp.service.DTO.GraveOwnerDTO;
 import org.springframework.stereotype.Component;
 

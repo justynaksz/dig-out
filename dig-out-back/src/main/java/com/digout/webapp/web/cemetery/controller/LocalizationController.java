@@ -1,7 +1,7 @@
 package com.digout.webapp.web.cemetery.controller;
 
-import com.digout.webapp.repository.cemetery.model.Localization;
-import com.digout.webapp.repository.cemetery.repository.LocalizationRepository;
+import com.digout.webapp.repository.model.Localization;
+import com.digout.webapp.repository.repository.LocalizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

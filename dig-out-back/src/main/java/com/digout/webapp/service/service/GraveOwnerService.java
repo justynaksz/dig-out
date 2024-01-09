@@ -1,7 +1,7 @@
 package com.digout.webapp.service.service;
 
-import com.digout.webapp.repository.cemetery.model.GraveOwner;
-import com.digout.webapp.repository.cemetery.repository.GraveOwnerRepository;
+import com.digout.webapp.repository.model.GraveOwner;
+import com.digout.webapp.repository.repository.GraveOwnerRepository;
 import com.digout.webapp.service.DTO.GraveOwnerDTO;
 import com.digout.webapp.service.exeption.EmptyResultException;
 import com.digout.webapp.service.exeption.InvalidInputException;

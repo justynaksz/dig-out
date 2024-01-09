@@ -128,7 +128,7 @@ public class ScriptGenerator {
 
                 StringBuilder appUserBuilder = new StringBuilder();
                 appUserBuilder.append("INSERT INTO app_user (nickname, password, e_mail, role," +
-                        " grave_owner, avatar) VALUES (");
+                        " grave_owner, photo) VALUES (");
                 appUserBuilder.append("'").append(appUserAttributes[0]).append("',");
                 appUserBuilder.append("'").append(appUserAttributes[1]).append("',");
                 appUserBuilder.append("'").append(appUserAttributes[2]).append("',");

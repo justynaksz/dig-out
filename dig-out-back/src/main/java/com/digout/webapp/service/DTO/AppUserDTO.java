@@ -2,7 +2,7 @@ package com.digout.webapp.service.DTO;
 
 import java.util.Objects;
 
-public class AppUserDTO {
+public class AppUserDTO implements DTO {
 
     private final int id;
     private final String nickname;
@@ -10,17 +10,17 @@ public class AppUserDTO {
     private final String email;
     private final String role;
     private final GraveOwnerDTO graveOwner;
-    private final String avatar;
+    private final String photo;
 
     public AppUserDTO(int id, String nickname, String password, String email,
-                      String role, GraveOwnerDTO graveOwner, String avatar) {
+                      String role, GraveOwnerDTO graveOwner, String photo) {
         this.id = id;
         this.nickname = nickname;
         this.password = password;
         this.email = email;
         this.role = role;
         this.graveOwner = graveOwner;
-        this.avatar = avatar;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -47,8 +47,8 @@ public class AppUserDTO {
         return graveOwner;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getPhoto() {
+        return photo;
     }
 
     @Override
@@ -61,11 +61,11 @@ public class AppUserDTO {
                 && Objects.equals(email, that.email)
                 && Objects.equals(role, that.role)
                 && Objects.equals(graveOwner, that.graveOwner)
-                && Objects.equals(avatar, that.avatar);
+                && Objects.equals(photo, that.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nickname, password, email, role, graveOwner, avatar);
+        return Objects.hash(id, nickname, password, email, role, graveOwner, photo);
     }
 }

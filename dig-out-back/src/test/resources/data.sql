@@ -22,8 +22,8 @@ INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectio
 INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave, photo) VALUES ('Adam', 'Norris', '1978-11-01', '2019-12-17', false, 1, '123457656542512345');
 INSERT INTO deceased (first_name, last_name, birth_date, death_date, is_infectious_disease, grave, photo) VALUES ('Collin', 'Moody', '1964-04-19', '2023-01-07', false, 3, '1234564565412345');
 
-INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, avatar) VALUES ('dbesciak', 'aloha', 'dbesciak@gmail.com', 'USER', 4, NULL);
-INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, avatar) VALUES ('administrator', 'difficultPassword', 'administrator@dig-out.com', 'ADMIN', NULL, '123452011142512345');
-INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, avatar) VALUES ('blondie85', 'myNewPassword', 'blondie85@onet.com', 'USER', 1, '1234521178212345');
-INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, avatar) VALUES ('johnGross', 'littleJohnny', 'john_gross@gmail.com', 'USER', 5, '123452174612345');
-INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, avatar) VALUES ('digger', 'just_be_nice', 'digger2023@yahoo.com', 'USER', NULL, NULL);
+INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, photo) VALUES ('dbesciak', 'aloha', 'dbesciak@gmail.com', 'USER', 4, NULL);
+INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, photo) VALUES ('administrator', 'difficultPassword', 'administrator@dig-out.com', 'ADMIN', NULL, '123452011142512345');
+INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, photo) VALUES ('blondie85', 'myNewPassword', 'blondie85@onet.com', 'USER', 1, '1234521178212345');
+INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, photo) VALUES ('johnGross', 'littleJohnny', 'john_gross@gmail.com', 'USER', 5, '123452174612345');
+INSERT INTO app_user (nickname, password, e_mail, role, grave_owner, photo) VALUES ('digger', 'just_be_nice', 'digger2023@yahoo.com', 'USER', NULL, NULL);

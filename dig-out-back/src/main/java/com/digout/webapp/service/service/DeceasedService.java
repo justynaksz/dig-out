@@ -1,7 +1,7 @@
 package com.digout.webapp.service.service;
 
-import com.digout.webapp.repository.cemetery.model.Deceased;
-import com.digout.webapp.repository.cemetery.repository.DeceasedRepository;
+import com.digout.webapp.repository.model.Deceased;
+import com.digout.webapp.repository.repository.DeceasedRepository;
 import com.digout.webapp.service.DTO.DeceasedDTO;
 import com.digout.webapp.service.exeption.EmptyResultException;
 import com.digout.webapp.service.exeption.InvalidInputException;

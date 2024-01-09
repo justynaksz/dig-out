@@ -1,4 +1,4 @@
-package com.digout.webapp.repository.cemetery.model;
+package com.digout.webapp.repository.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,20 +36,20 @@ public class AppUser {
     private GraveOwner graveOwner;
 
     @Column
-    private String avatar;
+    private String photo;
 
     public AppUser() {
     }
 
     public AppUser(int id, String nickname, String password, String email,
-                   String role, GraveOwner graveOwner, String avatar) {
+                   String role, GraveOwner graveOwner, String photo) {
         this.id = id;
         this.nickname = nickname;
         this.password = password;
         this.email = email;
         this.role = role;
         this.graveOwner = graveOwner;
-        this.avatar = avatar;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -100,12 +100,12 @@ public class AppUser {
         this.graveOwner = graveOwner;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     @Override
@@ -118,12 +118,12 @@ public class AppUser {
                 && Objects.equals(email, appUser.email)
                 && Objects.equals(role, appUser.role)
                 && Objects.equals(graveOwner, appUser.graveOwner)
-                && Objects.equals(avatar, appUser.avatar);
+                && Objects.equals(photo, appUser.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nickname, password, email, role, graveOwner, avatar);
+        return Objects.hash(id, nickname, password, email, role, graveOwner, photo);
     }
 
     @Override
@@ -135,7 +135,7 @@ public class AppUser {
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
                 ", graveOwner=" + graveOwner +
-                ", avatar='" + avatar + '\'' +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 }

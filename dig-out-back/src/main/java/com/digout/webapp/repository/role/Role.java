@@ -1,4 +1,4 @@
-package com.digout.webapp.repository.cemetery.role;
+package com.digout.webapp.repository.role;
 
 public record Role() {
     public static final String USER = "USER";

@@ -1,7 +1,7 @@
 package com.digout.webapp.service.service;
 
-import com.digout.webapp.repository.cemetery.model.Grave;
-import com.digout.webapp.repository.cemetery.repository.GraveRepository;
+import com.digout.webapp.repository.model.Grave;
+import com.digout.webapp.repository.repository.GraveRepository;
 import com.digout.webapp.service.DTO.GraveDTO;
 import com.digout.webapp.service.DTO.GraveOwnerDTO;
 import com.digout.webapp.service.exeption.EmptyResultException;
@@ -53,7 +53,7 @@ public class GraveService {
     }
 
     public List<GraveDTO> getAvailableByCemetery(String cemetery) throws EmptyResultException, InvalidInputException {
-        graveValidator.validateCemeteryLength(cemetery);
+        graveValidator.validateCemetery(cemetery);
         var graves = new ArrayList<GraveDTO>();
         for (Grave grave : graveRepository.findAvailableByCemetery(cemetery)) {
             graves.add(graveMapper.toDTO(grave));

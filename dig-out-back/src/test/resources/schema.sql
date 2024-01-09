@@ -35,7 +35,7 @@ CREATE TABLE app_user (
     e_mail VARCHAR(70) NOT NULL,
     role  VARCHAR(50) NOT NULL,
     grave_owner INT,
-    avatar VARCHAR(200)
+    photo VARCHAR(200)
 );
 
 CREATE TABLE deceased (
