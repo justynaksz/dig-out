@@ -3,6 +3,7 @@ package com.digout.webapp.service.service;
 import com.digout.webapp.repository.model.AppUser;
 import com.digout.webapp.repository.repository.AppUserRepository;
 import com.digout.webapp.service.DTO.AppUserDTO;
+import com.digout.webapp.service.exeption.EmptyFieldException;
 import com.digout.webapp.service.exeption.EmptyResultException;
 import com.digout.webapp.service.exeption.InvalidInputException;
 import com.digout.webapp.service.exeption.NotFoundException;
@@ -58,7 +59,7 @@ public class AppUserService {
         appUserRepository.deleteById(id);
     }
 
-    public AppUserDTO save(AppUserDTO appUserDTO) throws InvalidInputException {
+    public AppUserDTO save(AppUserDTO appUserDTO) throws InvalidInputException, EmptyFieldException {
         appUserValidator.isValid(appUserDTO);
         var appUser = appUserMapper.toModel(appUserDTO);
         return appUserMapper.toDTO(appUserRepository.save(appUser));

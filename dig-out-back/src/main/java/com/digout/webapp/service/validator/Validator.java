@@ -1,12 +1,13 @@
 package com.digout.webapp.service.validator;
 
 import com.digout.webapp.service.DTO.DTO;
+import com.digout.webapp.service.exeption.EmptyFieldException;
 import com.digout.webapp.service.exeption.InvalidInputException;
 import com.digout.webapp.service.exeption.PatternBreakException;
 
 public abstract class Validator {
 
-    public abstract void isValid(DTO dto) throws InvalidInputException;
+    public abstract void isValid(DTO dto) throws InvalidInputException, EmptyFieldException;
 
     public void validateId(int id) throws InvalidInputException {
         if (id <= 0) {
@@ -32,6 +33,8 @@ public abstract class Validator {
 
     protected void validatePhoto(String photo) throws InvalidInputException {
         String photoField = "PHOTO";
-        validateLength(photoField, 200, photo);
+        if (photo != null && !photo.isEmpty()) {
+            validateLength(photoField, 200, photo);
+        }
     }
 }
