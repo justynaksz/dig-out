@@ -25,16 +25,24 @@ public abstract class Validator {
     // TODO fix the pattern (just copied for now)
     protected void validateCemetery(String cemetery) throws InvalidInputException {
         String cemeteryField = "CEMETERY";
-        validateLength(cemeteryField, 200, cemetery);
-        if (!cemetery.matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")) {
-            throw new PatternBreakException(cemeteryField, cemetery);
+        if (cemetery != null && !cemetery.isEmpty()) {
+            validateLength(cemeteryField, 200, cemetery);
+            if (!cemetery.matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")) {
+                throw new PatternBreakException(cemeteryField, cemetery);
+            }
         }
+
     }
 
     protected void validatePhoto(String photo) throws InvalidInputException {
         String photoField = "PHOTO";
         if (photo != null && !photo.isEmpty()) {
             validateLength(photoField, 200, photo);
+            if(!photo.matches("^[0-9]+$")){
+                throw new PatternBreakException(photoField, photo);
+            }
         }
     }
+
+
 }
