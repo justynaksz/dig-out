@@ -27,42 +27,30 @@ public class AppUserValidator extends Validator {
 
     private void validateNickname(String nickname) throws InvalidInputException, EmptyFieldException {
         var nicknameField = "NICKNAME";
-        if (nickname == null || nickname.isEmpty()) {
-            throw new EmptyFieldException(nicknameField);
-        }
+        validateNotEmptyOrNull(nickname, nicknameField);
         validateLength(nicknameField, 50, nickname);
-        if (!nickname.matches("[[a-zA-Z0-9._%-]+]{5,}")) {
-            throw new PatternBreakException(nicknameField, nickname);
-        }
+        validatePattern(nickname, nicknameField, "[[a-zA-Z0-9._%-]+]{5,}");
     }
 
     private void validatePassword(String password) throws InvalidInputException, EmptyFieldException {
         var passwordField = "PASSWORD";
-        if (password == null || password.isEmpty()) {
-            throw new EmptyFieldException(passwordField);
-        }
+        validateNotEmptyOrNull(password, passwordField);
         validateLength(passwordField, 70, password);
-        if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
-            throw new PatternBreakException(passwordField, password);
-        }
+        var regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        validatePattern(password, passwordField, regex);
     }
 
     private void validateEmail(String email) throws InvalidInputException, EmptyFieldException {
         var emailField = "E-MAIL";
-        if (email == null || email.isEmpty()) {
-            throw new EmptyFieldException(emailField);
-        }
+        validateNotEmptyOrNull(email, emailField);
         validateLength(emailField, 70, email);
-        if (!email.matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")) {
-            throw new PatternBreakException(emailField, email);
-        }
+        var regex = "^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+        validatePattern(email, emailField, regex);
     }
 
     private void validateRole(String role) throws InvalidInputException, EmptyFieldException {
         var roleField = "ROLE";
-        if (role == null || role.isEmpty()) {
-            throw new EmptyFieldException(roleField);
-        }
+        validateNotEmptyOrNull(role, roleField);
         if (!role.equals(Role.ADMIN) && !role.equals(Role.USER)) {
             throw new InvalidInputException(roleField, role, "USER or ADMIN required.");
         }
