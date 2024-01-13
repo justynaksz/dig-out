@@ -11,7 +11,7 @@ public abstract class Validator {
     public abstract void isValid(DTO dto) throws InvalidInputException, EmptyFieldException, DeathBeforeBirthDateException;
 
     public void validateId(int id) throws InvalidInputException {
-        if (id <= 0) {
+        if (id < 0) {
             throw new InvalidInputException("ID", String.valueOf(id), "Id value must be positive.");
         }
     }
@@ -23,7 +23,7 @@ public abstract class Validator {
     }
 
     protected void validateNotEmptyOrNull(String value, String field) throws EmptyFieldException {
-        if (value == null || value.isEmpty()) {
+        if (value == null || value.trim().isEmpty()) {
             throw new EmptyFieldException(field);
         }
     }
@@ -38,7 +38,7 @@ public abstract class Validator {
         String cemeteryField = "CEMETERY";
         validateNotEmptyOrNull(cemetery, cemeteryField);
         validateLength(cemeteryField, 200, cemetery);
-        var regex = "/^[a-zA-Z1-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '-]+$/u";
+        var regex = "^[a-zA-Z1-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '-]{3,}$";
         validatePattern(cemetery, cemeteryField, regex);
     }
 
@@ -59,7 +59,7 @@ public abstract class Validator {
     private void validateFirstAndLastName(String name, String field) throws EmptyFieldException, InvalidInputException {
         validateNotEmptyOrNull(name, field);
         validateLength(field, 50, name);
-        var regex = "/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u";
+        var regex = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$";
         validatePattern(name, field, regex);
     }
 }

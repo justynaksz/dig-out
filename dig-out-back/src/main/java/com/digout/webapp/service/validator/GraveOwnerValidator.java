@@ -24,21 +24,20 @@ public class GraveOwnerValidator extends Validator {
 
     private void validatePesel(String pesel) throws InvalidInputException {
         var peselField = "PESEL";
-        validateLength(peselField, 50, pesel);
         validatePattern(pesel, peselField, "^[0-9]{11}$");
     }
 
     private void validateStreet(String street) throws InvalidInputException {
         var streetField = "STREET";
         validateLength(streetField, 100, street);
-        var regex = "/^[a-zA-Z1-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u";
+        var regex = "^[a-zA-Z1-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$";
         validatePattern(street, streetField, regex);
     }
 
     private void validateParcel(String parcel) throws InvalidInputException {
         var parcelField = "PARCEL";
         validateLength(parcelField, 10, parcel);
-        var regex = "^[1-9]\\d*(?: ?(?:[a-z]|[/-] ?\\d+[a-z]?))?$";
+        var regex = "^[a-zA-Z1-9 /-]+$";
         validatePattern(parcel, parcelField, regex);
     }
 
@@ -50,20 +49,9 @@ public class GraveOwnerValidator extends Validator {
         validatePattern(city, cityField, regex);
     }
 
-    // Every postal code system uses only A-Z and/or 0-9 and sometimes space/dash
-    //
-    //The shortest postal code format is Sierra Leone with NN
-    //
-    //The longest is American Samoa with NNNNN-NNNNNN
-    //
-    //You should allow one space or dash.
-    //
-    //Should not begin or end with space or dash
     private void validatePostalCode(String postalCode) throws InvalidInputException {
         var postalCodeField = "POSTAL_CODE";
         validateLength(postalCodeField, 10, postalCode);
-        var regex = "(?i)^[a-z0-9][a-z0-9\\- ]{0,10}[a-z0-9]$";
-        validatePattern(postalCode, postalCodeField, regex);
     }
 
     //All names must start with a capital letter, so something like "United States" is valid but "United states" is not. The weakness, of course, is that "United States of America" isn't considered valid.
@@ -74,13 +62,12 @@ public class GraveOwnerValidator extends Validator {
     private void validateCountry(String country) throws InvalidInputException {
         var countryField = "COUNTRY";
         validateLength(countryField, 50, country);
-        var regex = "^[A-Z][a-z]+( -[A-Z][a-z]+)*$";
+        var regex = "^[A-Z][a-z]+([ -][A-Z][a-z]+)*$";
         validatePattern(country, countryField, regex);
     }
 
     private void validatePhoneNumber(String phoneNumber) throws InvalidInputException {
         var phoneNumberField = "PHONE_NUMBER";
-        validateLength(phoneNumberField, 50, phoneNumber);
-        validatePattern(phoneNumber, phoneNumberField, "[0-9]{6,12}");
+        validatePattern(phoneNumber, phoneNumberField, "[+]?[0-9- ]{6,15}");
     }
 }

@@ -33,11 +33,11 @@ public class GraveValidator extends Validator {
         var urn = "urn grave";
         var columbarium = "columbarium";
         if(!type.equals(coffin)
-                || !type.equals(doubleCoffin)
-                || !type.equals(urn)
-                || !type.equals(columbarium)) {
+                && !type.equals(doubleCoffin)
+                && !type.equals(urn)
+                && !type.equals(columbarium)) {
             throw new InvalidInputException(typeField, type, "Available grave types: " + coffin + ", "
-                    + doubleCoffin + ", " + urn +", " + columbarium);
+                    + doubleCoffin + ", " + urn + ", " + columbarium);
         }
     }
 }

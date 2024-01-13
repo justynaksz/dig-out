@@ -1,9 +1,9 @@
 CREATE TABLE localization (
 	id SERIAL PRIMARY KEY,
 	cemetery VARCHAR(200) NOT NULL,
-	quarter VARCHAR(4) NOT NULL,
-	localization_row VARCHAR(4) NOT NULL,
-	localization_column VARCHAR(4) NOT NULL
+	quarter VARCHAR(8) NOT NULL,
+	localization_row VARCHAR(8) NOT NULL,
+	localization_column VARCHAR(8) NOT NULL
 );
 
 CREATE TABLE grave (
@@ -25,7 +25,7 @@ CREATE TABLE grave_owner (
     city VARCHAR(50),
     postal_code VARCHAR(10),
     country VARCHAR(50),
-    phone_number VARCHAR(50)
+    phone_number VARCHAR(15)
 );
 
 CREATE TABLE app_user (

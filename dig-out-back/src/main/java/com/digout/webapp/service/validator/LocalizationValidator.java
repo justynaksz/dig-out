@@ -24,27 +24,25 @@ public class LocalizationValidator extends Validator{
     }
 
     private void validateQuarter(String quarter) throws InvalidInputException, EmptyFieldException {
-        var quarterField = "QUARTER";
-        validateNotEmptyOrNull(quarter, quarterField);
-        validateLength(quarterField, 4, quarter);
-        validatePattern(quarter, quarterField);
+        validateQuarterColumnOrRow(quarter, "QUARTER");
     }
 
     private void validateColumn(String column) throws InvalidInputException, EmptyFieldException {
-        validateColumnOrRow(column, "COLUMN");
+        validateQuarterColumnOrRow(column, "COLUMN");
     }
 
     private void validateRow(String row) throws InvalidInputException, EmptyFieldException {
-        validateColumnOrRow(row, "ROW");
+        validateQuarterColumnOrRow(row, "ROW");
     }
 
-    private void validateColumnOrRow(String value, String field) throws EmptyFieldException, InvalidInputException {
+    private void validateQuarterColumnOrRow(String value, String field)
+            throws EmptyFieldException, InvalidInputException {
         validateNotEmptyOrNull(value, field);
-        validateLength(field, 4, value);
+        validateLength(field, 8, value);
         validatePattern(value, field);
     }
 
     private void validatePattern(String value, String field) throws PatternBreakException {
-        validatePattern(value, field, "(?i)^[a-z0-9][a-z0-9\\\\- ]{0,10}[a-z0-9]$");
+        validatePattern(value, field, "^[a-zA-Z0-9]+[a-zA-Z0-9 /-]?[a-zA-Z0-9]*$");
     }
 }

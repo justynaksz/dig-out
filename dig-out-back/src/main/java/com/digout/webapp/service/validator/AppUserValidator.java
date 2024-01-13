@@ -5,7 +5,6 @@ import com.digout.webapp.service.DTO.AppUserDTO;
 import com.digout.webapp.service.DTO.DTO;
 import com.digout.webapp.service.exeption.EmptyFieldException;
 import com.digout.webapp.service.exeption.InvalidInputException;
-import com.digout.webapp.service.exeption.PatternBreakException;
 import org.springframework.stereotype.Component;
 
 @Component

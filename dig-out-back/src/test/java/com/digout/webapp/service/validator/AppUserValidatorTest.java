@@ -268,7 +268,7 @@ public class AppUserValidatorTest {
         @DisplayName("app user - no admin or user role")
         void whenNoAdminOrUserInUserRoleThrowsException() {
             // GIVEN
-            var appUser = new AppUserDTO(5, "digger", "justBeNice11!", "digger2023@yahoo.yahoohoocom",
+            var appUser = new AppUserDTO(5, "digger", "justBeNice11!", "digger2023@yahoo.com",
                     "PERSON", null, null);
             // WHEN
 
