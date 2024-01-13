@@ -191,8 +191,8 @@ public class AppUserValidatorTest {
         @DisplayName("app user - no @ in e-mail")
         void whenNoSpecialSignIndUserEmailThrowsException() {
             // GIVEN
-            var appUser = new AppUserDTO(5, "digger", "justBeNice11!", "digger2023yahoo.com",
-                    Role.USER, null, null);
+            var appUser = new AppUserDTO(5, "digger", "justBeNice11!",
+                    "digger2023yahoo.com", Role.USER, null, null);
             // WHEN
 
             // THEN
@@ -240,7 +240,8 @@ public class AppUserValidatorTest {
         void whenTooLongUserEmailThrowsException() {
             // GIVEN
             var appUser = new AppUserDTO(5, "digger", "justBeNice11!",
-                    "digger2023aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2023@yahoo.com", Role.USER, null, null);
+                    "digger2023aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2023@yahoo.com", Role.USER,
+                    null, null);
             // WHEN
 
             // THEN
@@ -268,8 +269,8 @@ public class AppUserValidatorTest {
         @DisplayName("app user - no admin or user role")
         void whenNoAdminOrUserInUserRoleThrowsException() {
             // GIVEN
-            var appUser = new AppUserDTO(5, "digger", "justBeNice11!", "digger2023@yahoo.com",
-                    "PERSON", null, null);
+            var appUser = new AppUserDTO(5, "digger", "justBeNice11!",
+                    "digger2023@yahoo.com", "PERSON", null, null);
             // WHEN
 
             // THEN
@@ -297,8 +298,8 @@ public class AppUserValidatorTest {
         @DisplayName("app user - special signs in photo")
         void whenSpecialSignsInUserPhotoThrowsException() {
             // GIVEN
-            var appUser = new AppUserDTO(5, "digger", "justBeNice11!", "digger2023@yahoo.com",
-                    Role.USER, null, "87932!5072983:");
+            var appUser = new AppUserDTO(5, "digger", "justBeNice11!",
+                    "digger2023@yahoo.com", Role.USER, null, "87932!5072983:");
             // WHEN
 
             // THEN

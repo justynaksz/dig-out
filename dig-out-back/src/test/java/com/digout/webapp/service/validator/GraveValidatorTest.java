@@ -43,8 +43,8 @@ public class GraveValidatorTest {
                     null, null, null, null, null);
             var localization = new LocalizationDTO(1, "New moon cemetery", "A1", "7",
                     "18");
-            var grave = new GraveDTO(2, "double coffin grave", localization, graveOwner, "123452023072512345",
-                    true);
+            var grave = new GraveDTO(2, "double coffin grave", localization, graveOwner,
+                    "123452023072512345", true);
             // WHEN
 
             // GIVEN
@@ -91,8 +91,8 @@ public class GraveValidatorTest {
                     null, null, null, null, null);
             var localization = new LocalizationDTO(1, "New moon cemetery", "A1", "7",
                     "18");
-            var grave = new GraveDTO(2, "double urn grave", localization, graveOwner, "123452023072512345",
-                    true);
+            var grave = new GraveDTO(2, "double urn grave", localization, graveOwner,
+                    "123452023072512345", true);
             // WHEN
 
             // GIVEN

@@ -10,7 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-public class GraveOwnerTest {
+
+public class GraveOwnerValidatorTest {
 
     private final GraveOwnerValidator graveOwnerValidator = new GraveOwnerValidator();
 
@@ -19,7 +20,8 @@ public class GraveOwnerTest {
     void whenInputValidGraveOwnerDoesNotThrowException() {
         // GIVEN
         var graveOwner = new GraveOwnerDTO(3, "Robert", "Watson-Robertson", null,
-                "ul. Thomasa Wöödrowa Wilsona", null, "Knurów", null, "Burkina-Faso", null);
+                "ul. Thomasa Wöödrowa Wilsona", null, "Knurów", null,
+                "Burkina-Faso", null);
         // WHEN
 
         // THEN
@@ -185,7 +187,8 @@ public class GraveOwnerTest {
         void whenTooLongParcelThrowException() {
             // GIVEN
             var graveOwner = new GraveOwnerDTO(3, "Robert", "Watson", "99121702747",
-                    "ul. Thomasa Wöödrowa Wilsona", null, null, "177894A/157", null, null);
+                    "ul. Thomasa Wöödrowa Wilsona", null, null, "177894A/157", null,
+                    null);
             // WHEN
 
             // THEN
@@ -229,8 +232,8 @@ public class GraveOwnerTest {
         void whenNotAllowedSignInCityThrowException() {
             // GIVEN
             var graveOwner = new GraveOwnerDTO(3, "Robert", "Watson", "99121702747",
-                    "ul. Thomasa_Woodrowa_Wilsona", null, "New York C!ty", null, null,
-                    null);
+                    "ul. Thomasa_Woodrowa_Wilsona", null, "New York C!ty", null,
+                    null, null);
             // WHEN
 
             // THEN
