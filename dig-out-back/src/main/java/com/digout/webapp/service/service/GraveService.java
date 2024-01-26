@@ -11,6 +11,7 @@ import com.digout.webapp.service.exeption.NotFoundException;
 import com.digout.webapp.service.mapper.GraveMapper;
 import com.digout.webapp.service.mapper.GraveOwnerMapper;
 import com.digout.webapp.service.validator.GraveValidator;
+import com.digout.webapp.service.validator.ResultValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,66 +24,51 @@ public class GraveService {
     private final GraveRepository graveRepository;
     private final GraveMapper graveMapper;
     private final GraveOwnerMapper graveOwnerMapper;
-
     private final GraveValidator graveValidator;
-
-    private final String GRAVE = "GRAVE";
+    private final ResultValidator<Grave> resultValidator;
 
     @Autowired
 
     public GraveService(GraveRepository graveRepository,
                         GraveMapper graveMapper,
                         GraveOwnerMapper graveOwnerMapper,
-                        GraveValidator graveValidator) {
+                        GraveValidator graveValidator,
+                        ResultValidator<Grave> resultValidator) {
         this.graveRepository = graveRepository;
         this.graveMapper = graveMapper;
         this.graveOwnerMapper = graveOwnerMapper;
         this.graveValidator = graveValidator;
+        this.resultValidator = resultValidator;
     }
 
-    // TODO validation of grave owner
-    public List<GraveDTO> getByGraveOwner(GraveOwnerDTO graveOwnerDTO) throws EmptyResultException {
+    public List<GraveDTO> getByGraveOwner(GraveOwnerDTO graveOwnerDTO) throws EmptyResultException,
+            InvalidInputException, EmptyFieldException {
+        graveValidator.isValid(graveOwnerDTO);
         var graveOwner = graveOwnerMapper.toModel(graveOwnerDTO);
-        var graves = new ArrayList<GraveDTO>();
-        for (Grave grave : graveRepository.findByGraveOwner(graveOwner)) {
-            graves.add(graveMapper.toDTO(grave));
-        }
-        if (graves.isEmpty()) {
-            throw new EmptyResultException(GRAVE);
-        }
-        return graves;
+        var graves = graveRepository.findByGraveOwner(graveOwner);
+        resultValidator.verifyNotNullOrEmptyList(graves);
+        return graveMapper.convertModelToDTO(graves);
     }
 
-    public List<GraveDTO> getAvailableByCemetery(String cemetery) throws EmptyResultException, InvalidInputException, EmptyFieldException {
+    public List<GraveDTO> getAvailableByCemetery(String cemetery) throws EmptyResultException,
+            InvalidInputException, EmptyFieldException {
         graveValidator.validateCemetery(cemetery);
-        var graves = new ArrayList<GraveDTO>();
-        for (Grave grave : graveRepository.findAvailableByCemetery(cemetery)) {
-            graves.add(graveMapper.toDTO(grave));
-        }
-        if (graves.isEmpty()) {
-            throw new EmptyResultException(GRAVE);
-        }
-        return graves;
+        var graves = graveRepository.findAvailableByCemetery(cemetery);
+        resultValidator.verifyNotNullOrEmptyList(graves);
+        return graveMapper.convertModelToDTO(graves);
     }
 
     public List<GraveDTO> getAll() throws EmptyResultException {
-        var graves = new ArrayList<GraveDTO>();
-        for (Grave grave : graveRepository.findAll()) {
-            graves.add(graveMapper.toDTO(grave));
-        }
-        if (graves.isEmpty()) {
-            throw new EmptyResultException(GRAVE);
-        }
-        return graves;
+        var graves = graveRepository.findAll();
+        resultValidator.verifyNotNullOrEmptyList(graves);
+        return graveMapper.convertModelToDTO(graves);
     }
 
     public GraveDTO getById(int id) throws InvalidInputException, NotFoundException {
         graveValidator.validateId(id);
-        var result =  graveMapper.toDTO(graveRepository.findById(id));
-        if (result == null) {
-            throw new NotFoundException(GRAVE, id);
-        }
-        return result;
+        var grave =  graveRepository.findById(id);
+        resultValidator.verifyNotNull(grave, id);
+        return graveMapper.toDTO(grave);
     }
 
     public void delete(int id) throws InvalidInputException, NotFoundException {
@@ -90,9 +76,11 @@ public class GraveService {
         graveRepository.deleteById(id);
     }
 
-    // TODO validate grave
-    public GraveDTO save(GraveDTO graveDTO) {
+    public GraveDTO save(GraveDTO graveDTO) throws InvalidInputException, EmptyFieldException {
+        graveValidator.isValid(graveDTO);
         var grave = graveMapper.toModel(graveDTO);
         return graveMapper.toDTO(graveRepository.save(grave));
     }
+
+    // TODO find graves with free spaces for new deceased, adding parameter to grave which calculates capacity
 }

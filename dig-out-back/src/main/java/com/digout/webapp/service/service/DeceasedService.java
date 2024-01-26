@@ -3,11 +3,14 @@ package com.digout.webapp.service.service;
 import com.digout.webapp.repository.model.Deceased;
 import com.digout.webapp.repository.repository.DeceasedRepository;
 import com.digout.webapp.service.DTO.DeceasedDTO;
+import com.digout.webapp.service.exeption.DeathBeforeBirthDateException;
+import com.digout.webapp.service.exeption.EmptyFieldException;
 import com.digout.webapp.service.exeption.EmptyResultException;
 import com.digout.webapp.service.exeption.InvalidInputException;
 import com.digout.webapp.service.exeption.NotFoundException;
 import com.digout.webapp.service.mapper.DeceasedMapper;
 import com.digout.webapp.service.validator.DeceasedValidator;
+import com.digout.webapp.service.validator.ResultValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,71 +24,52 @@ public class DeceasedService {
     private final DeceasedMapper deceasedMapper;
     private final DeceasedValidator deceasedValidator;
 
-    private final String DECEASED = "DECEASED";
+    private final ResultValidator<Deceased> resultValidator;
 
     @Autowired
 
     public DeceasedService(DeceasedRepository deceasedRepository,
                            DeceasedMapper deceasedMapper,
-                           DeceasedValidator deceasedValidator) {
+                           DeceasedValidator deceasedValidator,
+                           ResultValidator<Deceased> resultValidator) {
         this.deceasedRepository = deceasedRepository;
         this.deceasedMapper = deceasedMapper;
         this.deceasedValidator = deceasedValidator;
+        this.resultValidator = resultValidator;
     }
 
     public List<DeceasedDTO> getByBirthDateAnniversary() throws EmptyResultException {
-        var deceasedList = new ArrayList<DeceasedDTO>();
-        for (Deceased deceased : deceasedRepository.findByBirthDateAnniversary()) {
-            deceasedList.add(deceasedMapper.toDTO(deceased));
-        }
-        if(deceasedList.isEmpty()) {
-            throw new EmptyResultException(DECEASED);
-        }
-        return deceasedList;
+        var deceasedList = deceasedRepository.findByBirthDateAnniversary();
+        resultValidator.verifyNotNullOrEmptyList(deceasedList);
+        return deceasedMapper.convertModelToDTO(deceasedList);
     }
 
     public List<DeceasedDTO> getByDeathDateAnniversary() throws EmptyResultException {
-        var deceasedList = new ArrayList<DeceasedDTO>();
-        for (Deceased deceased : deceasedRepository.findByDeathDateAnniversary()) {
-            deceasedList.add(deceasedMapper.toDTO(deceased));
-        }
-        if(deceasedList.isEmpty()) {
-            throw new EmptyResultException(DECEASED);
-        }
-        return deceasedList;
+        var deceasedList = deceasedRepository.findByDeathDateAnniversary();
+        resultValidator.verifyNotNullOrEmptyList(deceasedList);
+        return deceasedMapper.convertModelToDTO(deceasedList);
     }
 
     public List<DeceasedDTO> getAll() throws EmptyResultException {
-        var deceasedList = new ArrayList<DeceasedDTO>();
-        for (Deceased deceased : deceasedRepository.findAll()) {
-            deceasedList.add(deceasedMapper.toDTO(deceased));
-        }
-        if(deceasedList.isEmpty()) {
-            throw new EmptyResultException(DECEASED);
-        }
-        return deceasedList;
+        var deceasedList = deceasedRepository.findAll();
+        resultValidator.verifyNotNullOrEmptyList(deceasedList);
+        return deceasedMapper.convertModelToDTO(deceasedList);
     }
 
     public DeceasedDTO getById(int id) throws InvalidInputException, NotFoundException {
         deceasedValidator.validateId(id);
-        var result = deceasedMapper.toDTO(deceasedRepository.findById(id));
-        if (result == null) {
-            throw new NotFoundException(DECEASED, id);
-        }
-        return result;
+        var deceased = deceasedRepository.findById(id);
+        resultValidator.verifyNotNull(deceased, id);
+        return deceasedMapper.toDTO(deceased);
     }
 
-    // TODO deceased validation
-    public List<DeceasedDTO> getByParams(DeceasedDTO deceasedDTO) throws EmptyResultException {
+    public List<DeceasedDTO> getByParams(DeceasedDTO deceasedDTO) throws EmptyResultException,
+            InvalidInputException, EmptyFieldException, DeathBeforeBirthDateException {
+        deceasedValidator.isValid(deceasedDTO);
         var deceased = deceasedMapper.toModel(deceasedDTO);
-        var deceasedList = new ArrayList<DeceasedDTO>();
-        for (Deceased deceasedByParam : deceasedRepository.findByParams(deceased)) {
-            deceasedList.add(deceasedMapper.toDTO(deceasedByParam));
-        }
-        if(deceasedList.isEmpty()) {
-            throw new EmptyResultException(DECEASED);
-        }
-        return deceasedList;
+        var deceasedList = deceasedRepository.findByParams(deceased);
+        resultValidator.verifyNotNullOrEmptyList(deceasedList);
+        return deceasedMapper.convertModelToDTO(deceasedList);
     }
 
     public void delete(int id) throws InvalidInputException, NotFoundException {
@@ -93,8 +77,9 @@ public class DeceasedService {
         deceasedRepository.deleteById(id);
     }
 
-    // TODO deceased validation
-    public DeceasedDTO save(DeceasedDTO deceasedDTO) {
+    public DeceasedDTO save(DeceasedDTO deceasedDTO) throws InvalidInputException, EmptyFieldException,
+            DeathBeforeBirthDateException {
+        deceasedValidator.isValid(deceasedDTO);
         var deceased = deceasedMapper.toModel(deceasedDTO);
         return deceasedMapper.toDTO(deceasedRepository.save(deceased));
     }

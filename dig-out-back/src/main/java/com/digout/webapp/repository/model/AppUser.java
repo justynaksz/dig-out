@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "app_user")
-public class AppUser {
+public class AppUser extends Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +50,7 @@ public class AppUser {
         this.role = role;
         this.graveOwner = graveOwner;
         this.photo = photo;
+        tableName = "APP_USER";
     }
 
     public int getId() {

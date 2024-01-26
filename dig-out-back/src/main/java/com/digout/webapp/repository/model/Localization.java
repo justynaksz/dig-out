@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "localization")
-public class Localization {
+public class Localization extends Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +38,7 @@ public class Localization {
         this.quarter = quarter;
         this.localizationRow = localizationRow;
         this.localizationColumn = localizationColumn;
+        tableName = "LOCALIZATION";
     }
 
     public int getId() {

@@ -5,8 +5,9 @@ import com.digout.webapp.service.DTO.GraveOwnerDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GraveOwnerMapper {
+public class GraveOwnerMapper extends Mapper<GraveOwner, GraveOwnerDTO> {
 
+    @Override
     public GraveOwner toModel(GraveOwnerDTO graveOwnerDTO) {
         var id = graveOwnerDTO.getId();
         var firstName = graveOwnerDTO.getFirstName();
@@ -22,6 +23,7 @@ public class GraveOwnerMapper {
                 country, phoneNumber);
     }
 
+    @Override
     public GraveOwnerDTO toDTO(GraveOwner graveOwner) {
         var id = graveOwner.getId();
         var firstName = graveOwner.getFirstName();

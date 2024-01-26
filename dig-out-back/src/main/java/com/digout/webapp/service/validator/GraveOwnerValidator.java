@@ -54,11 +54,6 @@ public class GraveOwnerValidator extends Validator {
         validateLength(postalCodeField, 10, postalCode);
     }
 
-    //All names must start with a capital letter, so something like "United States" is valid but "United states" is not. The weakness, of course, is that "United States of America" isn't considered valid.
-    //
-    //Also, the first letter can be the only capital letter in the word. This is to ban stuff like "UNited States." Of course, it also bans stuff like "USA".
-    // and 'of the' 'and the' of
-    //One-letter country names are specifically not allowed (i.e. all country names must have at least two letters).
     private void validateCountry(String country) throws InvalidInputException {
         var countryField = "COUNTRY";
         validateLength(countryField, 50, country);

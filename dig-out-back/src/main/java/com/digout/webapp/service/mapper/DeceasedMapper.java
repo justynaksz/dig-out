@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DeceasedMapper {
+public class DeceasedMapper extends Mapper<Deceased, DeceasedDTO> {
 
     private final GraveMapper graveMapper;
 
@@ -15,6 +15,7 @@ public class DeceasedMapper {
         this.graveMapper = graveMapper;
     }
 
+    @Override
     public Deceased toModel(DeceasedDTO deceasedDTO) {
         var id = deceasedDTO.getId();
         var firstName = deceasedDTO.getFirstName();
@@ -27,6 +28,7 @@ public class DeceasedMapper {
         return new Deceased(id, firstName, lastName, birthDate, deathDate, isInfectiousDisease, grave, photo);
     }
 
+    @Override
     public DeceasedDTO toDTO(Deceased deceased) {
         var id = deceased.getId();
         var firstName = deceased.getFirstName();

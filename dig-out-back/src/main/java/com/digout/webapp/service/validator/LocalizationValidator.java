@@ -8,7 +8,7 @@ import com.digout.webapp.service.exeption.PatternBreakException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LocalizationValidator extends Validator{
+public class LocalizationValidator extends Validator {
 
     @Override
     public void isValid(DTO dto) throws InvalidInputException, EmptyFieldException {

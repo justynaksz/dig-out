@@ -5,8 +5,9 @@ import com.digout.webapp.service.DTO.LocalizationDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LocalizationMapper {
+public class LocalizationMapper extends Mapper<Localization, LocalizationDTO> {
 
+    @Override
     public Localization toModel(LocalizationDTO localizationDTO) {
         var id = localizationDTO.getId();
         var cemetery = localizationDTO.getCemetery();
@@ -16,6 +17,7 @@ public class LocalizationMapper {
         return new Localization(id, cemetery, quarter, localizationRow, localizationColumn);
     }
 
+    @Override
     public LocalizationDTO toDTO(Localization localization) {
         var id = localization.getId();
         var cemetery = localization.getCemetery();

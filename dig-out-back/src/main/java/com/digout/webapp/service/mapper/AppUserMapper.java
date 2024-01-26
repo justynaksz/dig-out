@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AppUserMapper {
+public class AppUserMapper extends Mapper<AppUser, AppUserDTO> {
 
     private final GraveOwnerMapper graveOwnerMapper;
 
@@ -15,6 +15,7 @@ public class AppUserMapper {
         this.graveOwnerMapper = graveOwnerMapper;
     }
 
+    @Override
     public AppUser toModel(AppUserDTO appUserDTO) {
         var id = appUserDTO.getId();
         var nickname = appUserDTO.getNickname();
@@ -26,6 +27,7 @@ public class AppUserMapper {
         return new AppUser(id, nickname, password, email, role, graveOwner, photo);
     }
 
+    @Override
     public AppUserDTO toDTO(AppUser appUser) {
         var id = appUser.getId();
         var nickname = appUser.getNickname();

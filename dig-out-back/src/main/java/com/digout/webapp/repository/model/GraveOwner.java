@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "grave_owner")
-public class GraveOwner {
+public class GraveOwner extends Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,6 +59,7 @@ public class GraveOwner {
         this.postalCode = postalCode;
         this.country = country;
         this.phoneNumber = phoneNumber;
+        tableName = "GRAVE_OWNER";
     }
 
     public int getId() {
