@@ -18,6 +18,13 @@ public class GraveValidator extends Validator {
         validateGrave(grave);
     }
 
+    public void validateAvailabilityInNewGraves (boolean isPlaceAvailable) throws InvalidInputException {
+        if (!isPlaceAvailable) {
+            throw new InvalidInputException("IS_PLACE_AVAILABLE", String.valueOf(isPlaceAvailable),
+                    "New grave cannot be created as unavailable.");
+        }
+    }
+
     private void validateGrave(GraveDTO grave) throws InvalidInputException, EmptyFieldException {
         validateType(grave.getType());
         localizationValidator.isValid(grave.getLocalization());

@@ -15,7 +15,6 @@ import com.digout.webapp.service.validator.ResultValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,17 +42,23 @@ public class GraveService {
 
     public List<GraveDTO> getByGraveOwner(GraveOwnerDTO graveOwnerDTO) throws EmptyResultException,
             InvalidInputException, EmptyFieldException {
-        graveValidator.isValid(graveOwnerDTO);
         var graveOwner = graveOwnerMapper.toModel(graveOwnerDTO);
         var graves = graveRepository.findByGraveOwner(graveOwner);
         resultValidator.verifyNotNullOrEmptyList(graves);
         return graveMapper.convertModelToDTO(graves);
     }
 
-    public List<GraveDTO> getAvailableByCemetery(String cemetery) throws EmptyResultException,
+    public List<GraveDTO> getGravesWithoutOwnersByCemetery(String cemetery) throws EmptyResultException,
             InvalidInputException, EmptyFieldException {
         graveValidator.validateCemetery(cemetery);
         var graves = graveRepository.findAvailableByCemetery(cemetery);
+        resultValidator.verifyNotNullOrEmptyList(graves);
+        return graveMapper.convertModelToDTO(graves);
+    }
+
+    public List<GraveDTO> getGravesByParam(GraveDTO graveDTO) throws EmptyResultException {
+        var grave = graveMapper.toModel(graveDTO);
+        var graves = graveRepository.findByParams(grave);
         resultValidator.verifyNotNullOrEmptyList(graves);
         return graveMapper.convertModelToDTO(graves);
     }
@@ -77,6 +82,9 @@ public class GraveService {
     }
 
     public GraveDTO save(GraveDTO graveDTO) throws InvalidInputException, EmptyFieldException {
+        if (graveDTO.getId() == 0) {
+            graveValidator.validateAvailabilityInNewGraves(graveDTO.isPlaceAvailable());
+        }
         graveValidator.isValid(graveDTO);
         var grave = graveMapper.toModel(graveDTO);
         return graveMapper.toDTO(graveRepository.save(grave));

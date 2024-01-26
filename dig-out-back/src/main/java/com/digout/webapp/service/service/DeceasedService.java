@@ -50,6 +50,15 @@ public class DeceasedService {
         return deceasedMapper.convertModelToDTO(deceasedList);
     }
 
+    public int getCountOfDeceasedInGrave(int graveId) throws InvalidInputException {
+        deceasedValidator.validateId(graveId);
+        var deceasedList = deceasedRepository.findByGraveId(graveId);
+        if (deceasedList == null) {
+            return 0;
+        }
+        return deceasedList.size();
+    }
+
     public List<DeceasedDTO> getAll() throws EmptyResultException {
         var deceasedList = deceasedRepository.findAll();
         resultValidator.verifyNotNullOrEmptyList(deceasedList);
@@ -65,7 +74,6 @@ public class DeceasedService {
 
     public List<DeceasedDTO> getByParams(DeceasedDTO deceasedDTO) throws EmptyResultException,
             InvalidInputException, EmptyFieldException, DeathBeforeBirthDateException {
-        deceasedValidator.isValid(deceasedDTO);
         var deceased = deceasedMapper.toModel(deceasedDTO);
         var deceasedList = deceasedRepository.findByParams(deceased);
         resultValidator.verifyNotNullOrEmptyList(deceasedList);

@@ -41,6 +41,13 @@ public class GraveOwnerService {
         return graveOwnerMapper.convertModelToDTO(graveOwners);
     }
 
+    public List<GraveOwnerDTO> getGraveOwnersByParam(GraveOwnerDTO graveOwnerDTO) throws EmptyResultException {
+        var graveOwner = graveOwnerMapper.toModel(graveOwnerDTO);
+        var graveOwners = graveOwnerRepository.findGraveOwnerByParams(graveOwner);
+        resultValidator.verifyNotNullOrEmptyList(graveOwners);
+        return graveOwnerMapper.convertModelToDTO(graveOwners);
+    }
+
     public GraveOwnerDTO getById(int id) throws InvalidInputException, NotFoundException {
         graveOwnerValidator.validateId(id);
         var graveOwner = graveOwnerRepository.findById(id);
