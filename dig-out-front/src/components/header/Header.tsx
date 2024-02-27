@@ -7,6 +7,8 @@ export const Header = () => (
       <li className='a'><NavLink className= 'link' to="/localizations">Localizations</NavLink></li>
       <li className='a'><NavLink className= 'link' to="/graves">Graves</NavLink></li>
       <li className='a'><NavLink className= 'link' to="/deceased">Deceased</NavLink></li>
+      <li className='a'><NavLink className= 'link' to="/registration">Registration</NavLink></li>
+      <li className='a'><NavLink className= 'link' to="/login">Login</NavLink></li>
     </nav>
   </header>
 )

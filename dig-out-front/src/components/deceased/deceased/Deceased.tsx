@@ -61,6 +61,5 @@ export const Deceased = ({
                 </table>
             </div>
         )
-
     }
     

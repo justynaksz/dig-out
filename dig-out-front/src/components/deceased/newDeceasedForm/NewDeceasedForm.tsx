@@ -49,7 +49,7 @@ export const NewDeceasedForm = () => {
 
         addDeceased({
             ...deceased,
-            id: '0',
+            id: '0'
         })
     }
 
