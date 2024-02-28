@@ -4,4 +4,8 @@ public class NotFoundException extends Exception {
     public NotFoundException (String object, int id) {
         super(object + " of id " + id + " could not be found.");
     }
+
+    public NotFoundException(String message) {
+        super(message);
+    }
 }

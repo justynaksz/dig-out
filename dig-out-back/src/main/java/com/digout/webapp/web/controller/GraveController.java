@@ -1,4 +1,4 @@
-package com.digout.webapp.web.cemetery.controller;
+package com.digout.webapp.web.controller;
 
 import com.digout.webapp.repository.model.Grave;
 import com.digout.webapp.repository.model.GraveOwner;

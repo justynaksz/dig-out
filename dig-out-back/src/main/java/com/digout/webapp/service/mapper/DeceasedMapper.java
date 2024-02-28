@@ -1,7 +1,9 @@
 package com.digout.webapp.service.mapper;
 
 import com.digout.webapp.repository.model.Deceased;
+import com.digout.webapp.repository.model.Grave;
 import com.digout.webapp.service.DTO.DeceasedDTO;
+import com.digout.webapp.service.DTO.GraveDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +25,10 @@ public class DeceasedMapper extends Mapper<Deceased, DeceasedDTO> {
         var birthDate = deceasedDTO.getBirthDate();
         var deathDate = deceasedDTO.getDeathDate();
         var isInfectiousDisease = deceasedDTO.isInfectiousDisease();
-        var grave = graveMapper.toModel(deceasedDTO.getGrave());
+        Grave grave = null;
+        if (deceasedDTO.getGrave() != null) {
+            grave = graveMapper.toModel(deceasedDTO.getGrave());
+        }
         var photo = deceasedDTO.getPhoto();
         return new Deceased(id, firstName, lastName, birthDate, deathDate, isInfectiousDisease, grave, photo);
     }
@@ -36,7 +41,10 @@ public class DeceasedMapper extends Mapper<Deceased, DeceasedDTO> {
         var birthDate = deceased.getBirthDate();
         var deathDate = deceased.getDeathDate();
         var isInfectiousDisease = deceased.isInfectiousDisease();
-        var grave = graveMapper.toDTO(deceased.getGrave());
+        GraveDTO grave = null;
+        if(deceased.getGrave() != null) {
+            grave = graveMapper.toDTO(deceased.getGrave());
+        }
         var photo = deceased.getPhoto();
         return new DeceasedDTO(id, firstName, lastName, birthDate, deathDate, isInfectiousDisease, grave, photo);
     }

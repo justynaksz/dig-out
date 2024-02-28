@@ -16,9 +16,17 @@ public class AppUserValidator extends Validator {
         validateUser(user);
     }
 
+    // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
+    public void validatePassword(String password) throws InvalidInputException, EmptyFieldException {
+        var passwordField = "PASSWORD";
+        validateNotEmptyOrNull(password, passwordField);
+        validateLength(passwordField, 70, password);
+        var regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        validatePattern(password, passwordField, regex);
+    }
+
     private void validateUser(AppUserDTO user) throws InvalidInputException, EmptyFieldException {
         validateNickname(user.getNickname());
-        validatePassword(user.getPassword());
         validateEmail(user.getEmail());
         validateRole(user.getRole());
         validatePhoto(user.getPhoto());
@@ -31,13 +39,6 @@ public class AppUserValidator extends Validator {
         validatePattern(nickname, nicknameField, "[[a-zA-Z0-9._%-]+]{5,}");
     }
 
-    private void validatePassword(String password) throws InvalidInputException, EmptyFieldException {
-        var passwordField = "PASSWORD";
-        validateNotEmptyOrNull(password, passwordField);
-        validateLength(passwordField, 70, password);
-        var regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
-        validatePattern(password, passwordField, regex);
-    }
 
     private void validateEmail(String email) throws InvalidInputException, EmptyFieldException {
         var emailField = "E-MAIL";

@@ -3,7 +3,6 @@ package com.digout.webapp.service.service;
 import com.digout.webapp.repository.model.AppUser;
 import com.digout.webapp.repository.repository.AppUserRepository;
 import com.digout.webapp.service.DTO.AppUserDTO;
-import com.digout.webapp.service.exeption.EmptyFieldException;
 import com.digout.webapp.service.exeption.EmptyResultException;
 import com.digout.webapp.service.exeption.InvalidInputException;
 import com.digout.webapp.service.exeption.NotFoundException;
@@ -11,13 +10,15 @@ import com.digout.webapp.service.mapper.AppUserMapper;
 import com.digout.webapp.service.validator.AppUserValidator;
 import com.digout.webapp.service.validator.ResultValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AppUserService {
+public class AppUserService implements UserDetailsService {
 
     private final AppUserRepository appUserRepository;
     private final AppUserMapper appUserMapper;
@@ -49,14 +50,13 @@ public class AppUserService {
         return appUserMapper.toDTO(appUser);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return appUserRepository.findByNickname(username);
+    }
+
     public void delete(int id) throws InvalidInputException, NotFoundException {
         getById(id);
         appUserRepository.deleteById(id);
-    }
-
-    public AppUserDTO save(AppUserDTO appUserDTO) throws InvalidInputException, EmptyFieldException {
-        appUserValidator.isValid(appUserDTO);
-        var appUser = appUserMapper.toModel(appUserDTO);
-        return appUserMapper.toDTO(appUserRepository.save(appUser));
     }
 }
