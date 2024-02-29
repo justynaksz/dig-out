@@ -1,7 +1,5 @@
 package com.digout.webapp.service.response;
 
-import com.digout.webapp.service.DTO.AppUserDTO;
-
 public class SignInResponse {
     private int statusCode;
     private String error;
@@ -9,17 +7,17 @@ public class SignInResponse {
     private String token;
     private String refreshToken;
     private String expirationTime;
-    private AppUserDTO appUserDTO;
+    private int userId;
 
     public SignInResponse(int statusCode, String error, String message, String token, String refreshToken,
-                          String expirationTime, AppUserDTO appUserDTO) {
+                          String expirationTime, int userId) {
         this.statusCode = statusCode;
         this.error = error;
         this.message = message;
         this.token = token;
         this.refreshToken = refreshToken;
         this.expirationTime = expirationTime;
-        this.appUserDTO = appUserDTO;
+        this.userId = userId;
     }
 
     public SignInResponse() {
@@ -73,11 +71,11 @@ public class SignInResponse {
         this.expirationTime = expirationTime;
     }
 
-    public AppUserDTO getAppUserDTO() {
-        return appUserDTO;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setAppUserDTO(AppUserDTO appUserDTO) {
-        this.appUserDTO = appUserDTO;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

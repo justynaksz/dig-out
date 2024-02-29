@@ -19,9 +19,9 @@ public class JwtUtils {
     private static final int EXPIRATION_PERIOD = 3600000;
 
     public JwtUtils() {
-        String SECRET_STRING = "15161718";
+        String SECRET_STRING = "15161718455278527217782988421752113543543542";
         byte[] keyBytes = Base64.getDecoder().decode(SECRET_STRING.getBytes(StandardCharsets.UTF_8));
-        this.key = new SecretKeySpec(keyBytes, "HmacSHA256");
+        this.key = new SecretKeySpec(keyBytes, "HMACSHA256");
     }
 
     public String generateToken(String nickname) {

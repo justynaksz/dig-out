@@ -72,7 +72,6 @@ public class AuthService {
             authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(nickname, password));
             var appUser = appUserRepository.findByNickname(nickname);
-            var appUserDto = appUserMapper.toDTO(appUser);
             var token = jwtUtils.generateToken(nickname);
             var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), nickname);
             signInResponse.setStatusCode(200);
@@ -80,7 +79,7 @@ public class AuthService {
             signInResponse.setRefreshToken(refreshToken);
             signInResponse.setExpirationTime("60minutes");
             signInResponse.setMessage("Successfully signed in.");
-            signInResponse.setAppUserDTO(appUserDto);
+            signInResponse.setUserId(appUser.getId());
         } catch (Exception e) {
             signInResponse.setStatusCode(500);
             signInResponse.setError(e.getMessage());
