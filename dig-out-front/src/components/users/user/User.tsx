@@ -1,5 +1,5 @@
 import React from 'react';
-import { OwnerType } from '../owner/Owner';
+import { OwnerType } from '../../owner/Owner';
 
 export type UserType = {
     id: string;
@@ -28,9 +28,6 @@ export const User = ({
                             <td>Nickname: </td><td>{nickname}</td>
                         </tr>
                         <tr className='itemLine'>
-                            <td>Password: </td><td>{password}</td>
-                        </tr>
-                        <tr className='itemLine'>
                             <td>Email: </td><td>{email}</td>
                         </tr>
                         <tr className='itemLine'>
@@ -53,3 +50,4 @@ export const User = ({
             </div>
         )
     }
+    

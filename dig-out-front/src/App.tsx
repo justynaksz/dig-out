@@ -8,6 +8,9 @@ import { Graves } from './pages/graves/Graves.tsx';
 import { DeceasedPage } from './pages/deceased/DeceasedPage.tsx';
 import { RegistrationForm } from './pages/user/RegistrationForm.tsx';
 import { LoginForm } from './pages/user/LoginForm.tsx';
+import { NotLoggedIn } from './pages/user/NotLoggedIn.tsx';
+import { UserById } from './components/users/userById/UserById.tsx';
+import { LoggedOut } from './pages/user/LoggedOut.tsx';
 
 function App() {
 
@@ -21,6 +24,9 @@ function App() {
         <Route path = '/deceased' element = {<DeceasedPage/>}/>
         <Route path = '/registration' element = {<RegistrationForm/>}/>
         <Route path = '/login' element = {<LoginForm/>}/>
+        <Route path = '/profile' element = {<UserById/>}/>
+        <Route path = '/notloggedin' element = {<NotLoggedIn/>}/>
+        <Route path = '/logout' element = {<LoggedOut/>}/>
     </Routes>
     </div>
   );
