@@ -21,4 +21,10 @@ public class ResultValidator <T>{
             throw new NotFoundException(Model.getTableName(), id);
         }
     }
+
+    public void verifyNotNull (T model, String nickname) throws NotFoundException {
+        if (model == null) {
+            throw new NotFoundException(Model.getTableName(), nickname);
+        }
+    }
 }

@@ -24,8 +24,7 @@ public class AppUserController {
     }
 
     @GetMapping("/profile/{id}")
-    public ResponseEntity<AppUserDTO> getUserById(@PathVariable int id) throws InvalidInputException, NotFoundException {
-        return ResponseEntity.ok(appUserService.getById(id));
+    public ResponseEntity<AppUserDTO> getUserByToken(@PathVariable String token) throws NotFoundException {
+        return ResponseEntity.ok(appUserService.getUserByToken(token));
     }
-
 }

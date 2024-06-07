@@ -39,7 +39,7 @@ public class DeceasedController {
         return deceasedRepository.findByGraveId(id);
     }
 
-    @GetMapping(path = "/search")
+    @PostMapping(path = "/search")
     public List<Deceased> findByParams(@RequestBody Deceased deceased) {
         return deceasedRepository.findByParams(deceased);
     }
