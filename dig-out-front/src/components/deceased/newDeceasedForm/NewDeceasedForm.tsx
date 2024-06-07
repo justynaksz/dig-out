@@ -7,7 +7,7 @@ import { LocalizationType } from '../../localizations/localization/Localization.
 export const NewDeceasedForm = () => {
     const [deceased, setDeceased] = useState<DeceasedType>({} as DeceasedType)
     const [grave, setGrave] = useState<GraveType>({} as GraveType)
-    const [localization, setLocalization] = useState<LocalizationType>({} as LocalizationType); 
+    const [localization, setLocalization] = useState<LocalizationType>({} as LocalizationType)
 
 
     const handleInput = (e: ChangeEvent<HTMLInputElement>) => {

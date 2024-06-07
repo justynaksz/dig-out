@@ -9,7 +9,7 @@ export const DeceasedList = ({deceasedList} : Props) => {
     return (
         <div>
             <ul className='list'>
-                {deceasedList.map((deceased) => (
+                {deceasedList?.map((deceased) => (
                     <li key={deceased.id}>
                         <Deceased {...deceased}/>
                     </li>

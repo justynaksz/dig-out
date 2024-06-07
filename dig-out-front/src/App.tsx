@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import { Header } from './components/header/Header.tsx';
 import { Routes, Route } from 'react-router-dom';
-import { Home } from './pages/Home.tsx';
+import { Home } from './pages/home/Home.tsx';
 import { Localizations } from './pages/localizations/Localizations.tsx';
 import { Graves } from './pages/graves/Graves.tsx';
 import { DeceasedPage } from './pages/deceased/DeceasedPage.tsx';
@@ -15,8 +15,7 @@ import { LoggedOut } from './pages/user/LoggedOut.tsx';
 function App() {
 
   return (
-    <div className='App'>
-      <Header/>
+    <div className='App'>   
       <Routes>
         <Route path = '/' element = {<Home/>}/>
         <Route path = '/localizations' element = {<Localizations/>}/>
@@ -27,7 +26,8 @@ function App() {
         <Route path = '/profile' element = {<UserById/>}/>
         <Route path = '/notloggedin' element = {<NotLoggedIn/>}/>
         <Route path = '/logout' element = {<LoggedOut/>}/>
-    </Routes>
+      </Routes>
+      <Header/>
     </div>
   );
 }

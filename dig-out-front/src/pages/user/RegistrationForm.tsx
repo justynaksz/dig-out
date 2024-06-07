@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import api from '../../api/axiosConfig.js'
-import { UserType } from '../../components/user/User'
+import { UserType } from '../../components/users/user/User.tsx'
 
 
 export const RegistrationForm = () => {
@@ -56,7 +56,7 @@ export const RegistrationForm = () => {
                <div>
                     <label htmlFor='password'>
                         <input
-                        type='text'
+                        type='password'
                         id='password'
                         name='password'
                         value={user?.password || ''}

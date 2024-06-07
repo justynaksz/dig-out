@@ -65,7 +65,7 @@ export const LoginForm = () => {
                     <label htmlFor='password'>
                         <input
                         className='input'
-                        type='text'
+                        type='password'
                         id='password'
                         name='password'
                         value={request?.password || ''}
